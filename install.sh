@@ -28,7 +28,10 @@ if [[ "$OS" == "Darwin" ]]; then
 elif [[ -f /etc/fedora-release ]]; then
 
   echo "--> Installing packages for Fedora..."
-  bash "$DOTFILES/packages/fedora/packages-fedora.sh"
+  bash "$DOTFILES/packages/fedora/packages.sh"
+
+  echo "--> Installing flatpak packages..."
+  bash "$DOTFILES/packages/fedora/flatpak.sh"
 
 else
   echo "⚠ Unknown OS, skipping package installation"
@@ -77,6 +80,20 @@ done
 if [[ "$OS" == "Darwin" ]] && [[ -f "$DOTFILES/scripts/macos-defaults.sh" ]]; then
   echo "--> Applying macOS defaults..."
   bash "$DOTFILES/scripts/macos-defaults.sh"
+fi
+
+# ──────────────────────────────────────────────────────
+# Node (через nvm)
+# ──────────────────────────────────────────────────────
+if [[ "$OS" == "Darwin" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]] && source "/opt/homebrew/opt/nvm/nvm.sh"
+
+  if ! command -v node &>/dev/null; then
+    echo "--> Installing Node LTS..."
+    nvm install --lts
+    nvm alias default node
+  fi
 fi
 
 echo ""

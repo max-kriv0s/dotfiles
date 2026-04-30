@@ -1,0 +1,32 @@
+# [font]
+font-family = "JetBrainsMono Nerd Font"
+#font-family = "Hack Nerd Font"
+font-size = 17
+
+# [theme]
+# Catppuccin Mocha
+#theme = Catppuccin Mocha
+
+# Kanagawa Dragon
+theme = Kanagawa Dragon
+
+# [window]
+window-width = 120
+window-height = 34
+window-padding-x = 12
+window-padding-y = 12
+
+# Скрывать шапку окна
+window-decoration = true
+
+# [visual effects]
+background-opacity = 0.92
+background-blur-radius = 15
+
+# [cursor]
+cursor-style = block
+cursor-style-blink = false
+cursor-opacity = 0.9
+
+# [behavior]
+macos-option-as-alt = true

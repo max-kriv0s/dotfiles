@@ -1,0 +1,10 @@
+# Машино-специфичные файлы с личными данными
+*.local
+
+# macOS мусор
+.DS_Store
+**/.DS_Store
+
+# Editor
+.idea/
+.vscode/

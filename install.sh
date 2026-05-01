@@ -50,7 +50,7 @@ cd "$DOTFILES"
 
 PACKAGES=(
   ghostty
-  # alacritty   # раскомментируй когда добавишь
+  alacritty   
   # zsh
   # git
   # nvim

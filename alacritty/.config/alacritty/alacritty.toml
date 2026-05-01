@@ -1,0 +1,43 @@
+# ── Import ────────────────────────────────────────────────────────────────────
+[general]
+import = [
+  "~/.config/alacritty/themes/kanagawa-dragon.toml",
+  #"~/.config/alacritty/themes/catppuccin-mocha.toml",
+]
+
+# ── Font ──────────────────────────────────────────────────────────────────────
+[font]
+size = 17.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+# ── Window ────────────────────────────────────────────────────────────────────
+[window]
+dimensions = { columns = 110, lines = 32 }
+padding = { x = 12, y = 12 }
+#decorations = "None"	# "None" — скрыть шапку как в ghostty
+decorations = "Full"
+opacity = 0.92
+
+# ── Cursor ────────────────────────────────────────────────────────────────────
+[cursor]
+style = { shape = "Block", blinking = "Never" }
+vi_mode_style = { shape = "Block", blinking = "Never" }
+
+# ── Keyboard ──────────────────────────────────────────────────────────────────
+# Option как Alt (как macos-option-as-alt в ghostty)
+[keyboard]
+bindings = [
+  { key = "Left",  mods = "Alt", chars = "\x1bb" },
+  { key = "Right", mods = "Alt", chars = "\x1bf" },
+]

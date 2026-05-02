@@ -52,7 +52,7 @@ PACKAGES=(
   ghostty
   alacritty   
   # zsh
-  # git
+  git
   # nvim
 )
 

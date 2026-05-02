@@ -1,0 +1,60 @@
+# Личные данные — имя, email, GPG ключ
+[include]
+    path = ~/dotfiles/local/.gitconfig.local
+
+# Ветка по умолчанию при git init
+[init]
+    defaultBranch = main
+
+# Цветной вывод в терминале
+[color]
+    ui = auto
+
+[diff]
+    # Показывать переименованные файлы как rename, не как delete+add
+    renames = true
+    # Использовать delta для просмотра диффов
+    tool = delta
+
+[core]
+    # Не конвертировать переносы строк
+    autocrlf = false
+    # Delta как pager для git diff, git log
+    pager = delta
+    # Глобальный gitignore для всех репозиториев
+    excludesfile = ~/.gitignore_global
+
+[delta]
+    # n/N для навигации между файлами в диффе
+    navigate = true
+    # Показывать было/стало в две колонки
+    side-by-side = true
+    # Номера строк
+    line-numbers = true
+    # Тема подсветки синтаксиса
+    syntax-theme = gruvbox-dark
+
+# Delta для интерактивных команд (git add -p)
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    # При конфликте показывать три секции:
+    # наша версия / общий предок / их версия
+    conflictstyle = diff3
+
+[pull]
+    # git pull делает merge, не rebase
+    rebase = false
+
+[push]
+    # Первый git push сам настраивает upstream
+    autoSetupRemote = true
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    # Красивый граф всех веток
+    lg = log --oneline --graph --decorate --all
+    

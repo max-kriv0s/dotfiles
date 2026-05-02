@@ -1,4 +1,7 @@
 # ── Import ────────────────────────────────────────────────────────────────────
+[env]
+TERM = "xterm-256color"
+
 [general]
 import = [
   "~/.config/alacritty/themes/kanagawa-dragon.toml",

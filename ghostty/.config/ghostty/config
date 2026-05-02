@@ -1,7 +1,11 @@
+# [term]
+term = xterm-256color
+
 # [font]
 font-family = "JetBrainsMono Nerd Font"
 #font-family = "Hack Nerd Font"
 font-size = 17
+font-thicken = true
 
 # [theme]
 # Catppuccin Mocha
@@ -30,3 +34,5 @@ cursor-opacity = 0.9
 
 # [behavior]
 macos-option-as-alt = true
+
+# [keybind]

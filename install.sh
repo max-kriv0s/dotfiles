@@ -83,16 +83,14 @@ if [[ "$OS" == "Darwin" ]] && [[ -f "$DOTFILES/scripts/macos-defaults.sh" ]]; th
 fi
 
 # ──────────────────────────────────────────────────────
-# Node (через nvm)
+# Node (через fnm)
 # ──────────────────────────────────────────────────────
-if [[ "$OS" == "Darwin" ]]; then
-  export NVM_DIR="$HOME/.nvm"
-  [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]] && source "/opt/homebrew/opt/nvm/nvm.sh"
-
-  if ! command -v node &>/dev/null; then
+if command -v fnm &>/dev/null; then
+  eval "$(fnm env --shell bash)"
+  if ! fnm list | grep -q "v22"; then
     echo "--> Installing Node LTS..."
-    nvm install --lts
-    nvm alias default node
+    fnm install --lts
+    fnm default lts-latest
   fi
 fi
 

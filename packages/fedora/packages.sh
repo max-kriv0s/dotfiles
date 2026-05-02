@@ -51,14 +51,10 @@ if ! command -v starship &>/dev/null; then
   curl -sS https://starship.rs/install.sh | sh
 fi
 
-# ── nvm + Node ───────────────────────────────────────────────────────────────
-if ! command -v nvm &>/dev/null; then
-  echo "--> Installing nvm..."
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-  nvm install --lts
-  nvm alias default node
+# fnm (не в DNF — ставится через curl)
+if ! command -v fnm &>/dev/null; then
+  echo "--> Installing fnm..."
+  curl -fsSL https://fnm.vercel.app/install | bash
 fi
 
 # ── uv (Python менеджер) ─────────────────────────────────────────────────────

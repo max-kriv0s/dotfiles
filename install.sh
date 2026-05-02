@@ -94,6 +94,36 @@ if command -v fnm &>/dev/null; then
   fi
 fi
 
+# ── TPM (Tmux Plugin Manager) ─────────────────────────────────────────────────
+if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+  echo "--> Installing TPM..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+# ── oh-my-zsh ────────────────────────────────────────────────────────────────
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "--> Installing oh-my-zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# ── powerlevel10k ─────────────────────────────────────────────────────────────
+if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
+  echo "--> Installing powerlevel10k..."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
+
+# ── zsh plugins ──────────────────────────────────────────────────────────────
+if [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions \
+    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
+if [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting \
+    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
+
 echo ""
 echo "==> Готово! Перезапусти терминал."
 echo "    Не забудь заполнить ~/.gitconfig.local"

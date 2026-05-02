@@ -118,6 +118,9 @@ source ~/.config/zsh/exports.zsh
 # Aliases
 source ~/.config/zsh/aliases.zsh
 
+# Functions
+source ~/.config/zsh/functions.zsh
+
 # Local (машино-специфичное)
 [[ -f ~/dotfiles/local/.zshrc.local ]] && source ~/dotfiles/local/.zshrc.local
 

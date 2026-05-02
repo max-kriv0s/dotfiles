@@ -11,6 +11,7 @@ sudo dnf update -y
 PACKAGES=(
   zsh                  # shell
   stow                 # управление симлинками dotfiles
+  tmux				   # терминальный мультиплексор
 
   # ── Редакторы ──────────────────────────────────────────────────────────────
   neovim               # терминальный редактор
@@ -44,13 +45,6 @@ PACKAGES=(
 echo "--> Installing packages..."
 sudo dnf install -y "${PACKAGES[@]}"
 
-# ── Starship ─────────────────────────────────────────────────────────────────
-# не в DNF — ставится отдельным скриптом
-if ! command -v starship &>/dev/null; then
-  echo "--> Installing starship..."
-  curl -sS https://starship.rs/install.sh | sh
-fi
-
 # fnm (не в DNF — ставится через curl)
 if ! command -v fnm &>/dev/null; then
   echo "--> Installing fnm..."
@@ -62,3 +56,4 @@ if ! command -v uv &>/dev/null; then
   echo "--> Installing uv..."
   curl -LsSf https://astral.sh/uv/install.sh | sh
 fi
+

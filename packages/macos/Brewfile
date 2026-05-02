@@ -47,6 +47,7 @@ brew "go"                    # Golang
 # ── Dev: утилиты ─────────────────────────────────────────────────────────────
 cask "orbstack"              # замена Docker Desktop (быстрее, меньше RAM)
 brew "lazydocker"            # TUI для управления Docker контейнерами
+brew "lazygit"       		 # TUI клиент для git
 cask "bruno"                 # замена Postman/Insomnia (коллекции хранятся в git)
 cask "tableplus"             # GUI для баз данных
 cask "dbeaver-community"     # универсальный GUI для баз данных

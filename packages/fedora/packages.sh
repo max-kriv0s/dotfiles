@@ -38,6 +38,7 @@ PACKAGES=(
 
   # ── Dev: утилиты ────────────────────────────────────────────────────────────
   lazydocker           # TUI для Docker
+  lazygit			   # TUI клиент для git
 )
 
 echo "--> Installing packages..."

@@ -1,0 +1,119 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "tree_view": false,
+    "dock": "left"
+  },
+  "base_keymap": "VSCode",
+  // "vim_mode": true,
+  "format_on_save": "on",
+  "autosave": "on_focus_change",
+  "soft_wrap": "editor_width",
+  "wrap_guides": [90],
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "file_finder": {
+    "modal_max_width": "medium",
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Warm Charmed Icons",
+  },
+  "project_panel": {
+    "entry_spacing": "standard",
+    "dock": "right",
+    "default_width": 350, // если сбилось Cmd+Shift+P → workspace::ResetOpenDocksSize
+    "auto_fold_dirs": false,
+    // "git_status": false,
+    "sticky_scroll": false,
+    "indent_guides": {
+      "show": "never",
+    },
+  },
+  "gutter": {
+    "min_line_number_digits": 0,
+  },
+  // "toolbar": {
+  //   "breadcrumbs": true,
+  //   "quick_actions": false,
+  //   "selections_menu": false,
+  // },
+  "tabs": {
+    "file_icons": true,
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Kanagawa Dragon - No Italics",
+  },
+  "ui_font_size": 17,
+  "ui_font_family": ".SystemUIFont",
+  "buffer_font_size": 16, // or 18
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_line_height": { "custom": 1.4 },
+  "buffer_font_features": { "calt": false },
+  "buffer_font_weight": 300,
+  "agent_ui_font_size": 16,
+  "agent_buffer_font_size": 16,
+  "current_line_highlight": "none",
+  "show_whitespaces": "none",
+  "relative_line_numbers": "enabled",
+  "scrollbar": {
+    "show": "never",
+  },
+  "indent_guides": {
+    "enabled": false,
+    "coloring": "indent_aware",
+  },
+  "cursor_shape": "block",
+  "cursor_blink": false,
+  "vertical_scroll_margin": 1,
+  "when_closing_with_no_tabs": "keep_window_open",
+  "preview_tabs": {
+    "enabled": false,
+  },
+  "extend_comment_on_newline": false,
+  "languages": {
+    "CSS": {
+      "enable_language_server": true,
+    },
+    "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "npx",
+          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "npx",
+          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
+        },
+      },
+    },
+  },
+}

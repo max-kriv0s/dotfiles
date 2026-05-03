@@ -55,6 +55,7 @@ PACKAGES=(
   tmux
   git
   nvim
+  zed
 )
 
 for pkg in "${PACKAGES[@]}"; do

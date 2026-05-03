@@ -8,3 +8,5 @@
 # Editor
 .idea/
 .vscode/
+
+tmux/.config/tmux/plugins/

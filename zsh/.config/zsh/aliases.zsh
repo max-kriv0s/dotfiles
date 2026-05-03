@@ -5,7 +5,6 @@ alias dotfiles="cd ~/dotfiles"
 alias ls="eza --tree --level=1 --icons=always --no-time --no-user --no-permissions"
 alias ll="eza -l --icons=always"
 alias la="eza -la --icons=always"
-alias cat="bat"
 
 # ── Git ──────────────────────────────────────────────────────────────────────
 alias g="git"

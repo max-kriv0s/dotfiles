@@ -51,9 +51,10 @@ cd "$DOTFILES"
 PACKAGES=(
   ghostty
   alacritty   
-  # zsh
+  zsh
+  tmux
   git
-  # nvim
+  nvim
 )
 
 for pkg in "${PACKAGES[@]}"; do

@@ -126,6 +126,28 @@ if [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" 
     ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 
+# VS Code
+if [[ "$OS" == "Darwin" ]]; then
+  VSCODE_DIR="$HOME/Library/Application Support/Code/User"
+elif [[ -f /etc/fedora-release ]]; then
+  VSCODE_DIR="$HOME/.config/Code/User"
+fi
+
+if [[ -n "$VSCODE_DIR" ]]; then
+  mkdir -p "$VSCODE_DIR"
+  ln -sf "$DOTFILES/vscode/settings.json" "$VSCODE_DIR/settings.json"
+  ln -sf "$DOTFILES/vscode/keybindings.json" "$VSCODE_DIR/keybindings.json"
+  echo "--> VS Code config linked"
+fi
+
+# VS Code extensions
+if command -v code &>/dev/null; then
+  echo "--> Installing VS Code extensions..."
+  while IFS= read -r extension; do
+    code --install-extension "$extension" --force
+  done < "$DOTFILES/vscode/extensions.txt"
+fi
+
 echo ""
 echo "==> Готово! Перезапусти терминал."
 echo "    Не забудь заполнить ~/.gitconfig.local"

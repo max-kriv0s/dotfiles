@@ -4,19 +4,27 @@ Personal dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Structure
 dotfiles/
-├── ghostty/                    # Terminal emulator config
+├── ghostty/                      # Terminal emulator config
+├── alacritty/                    # Alacritty config
+├── zsh/                          # Zsh config + aliases + exports
+├── git/                          # Git config + global gitignore
+├── tmux/                         # Tmux config
+├── nvim/                         # Neovim config
 ├── docs/
-│   └── tools.md                # Terminal tools cheatsheet
+│   ├── tools.md                  # Terminal tools cheatsheet
+│   ├── git.md                    # Git cheatsheet
+│   ├── tmux.md                   # Tmux cheatsheet
+│   └── nvim.md                   # Neovim cheatsheet
 ├── packages/
 │   ├── macos/
-│   │   ├── Brewfile            # Homebrew packages
-│   │   └── manual.md           # Apps installed manually
+│   │   ├── Brewfile              # Homebrew packages
+│   │   └── manual.md            # Apps installed manually
 │   └── fedora/
-│       ├── packages.sh         # DNF packages
-│       ├── flatpak.sh          # Flatpak packages
-│       └── manual.md           # Apps installed manually
+│       ├── packages.sh          # DNF packages
+│       ├── flatpak.sh           # Flatpak packages
+│       └── manual.md            # Apps installed manually
 ├── scripts/
-│   └── macos-defaults.sh       # macOS system defaults
+│   └── macos-defaults.sh        # macOS system defaults
 ├── local/
 │   ├── .gitconfig.local.example
 │   └── .zshrc.local.example
@@ -27,7 +35,12 @@ dotfiles/
 
 | Package | Description |
 |---------|-------------|
-| ghostty | Terminal emulator |
+| ghostty | Terminal emulator (primary) |
+| alacritty | Terminal emulator (secondary) |
+| zsh | Shell config, aliases, exports |
+| git | Git config and global gitignore |
+| tmux | Terminal multiplexer |
+| nvim | Neovim editor |
 
 ## Requirements
 
@@ -40,8 +53,18 @@ dotfiles/
 ```bash
 git clone https://github.com/max-kriv0s/dotfiles ~/dotfiles
 cd ~/dotfiles
+chmod +x install.sh
 ./install.sh
 ```
+
+## First run
+
+После установки:
+
+1. Заполни `~/.gitconfig.local` — имя, email
+2. Запусти `p10k configure` — настройка промпта
+3. В tmux нажми `Ctrl+B I` — установка плагинов
+4. Установи node через fnm: `fnm install --lts && fnm default lts-latest`
 
 ## Manual Installation
 
@@ -64,8 +87,11 @@ Machine-specific settings are stored in `*.local` files — not committed to git
 On first run `install.sh` creates them from examples:
 
 - `~/.gitconfig.local` — git username, email, GPG key
-- `~/.zshrc.local` — machine-specific env vars, paths
+- `~/dotfiles/local/.zshrc.local` — machine-specific env vars, paths
 
 ## Docs
 
-- [Terminal tools cheatsheet](docs/tools.md)
+- [Terminal tools](docs/tools.md)
+- [Git](docs/git.md)
+- [Tmux](docs/tmux.md)
+- [Neovim](docs/nvim.md)

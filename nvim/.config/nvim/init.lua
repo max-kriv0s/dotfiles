@@ -10,27 +10,36 @@ vim.opt.expandtab = true        -- табы как пробелы
 vim.opt.ignorecase = true       -- поиск без учёта регистра
 vim.opt.smartcase = true        -- но с учётом если есть заглавные
 vim.opt.termguicolors = true    -- true color
+vim.opt.scrolloff = 7           -- отступ при прокрутке
+vim.opt.swapfile = false        -- отключить swap файлы
+vim.opt.splitbelow = true       -- горизонтальный split открывается снизу
+vim.opt.splitright = true       -- вертикальный split открывается справа
+vim.opt.autoindent = true       -- сохранять отступ на новой строке
+vim.opt.smartindent = true      -- умный отступ
 
--- Курсор блок в insert режиме
+-- Курсор блок везде
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:block,r-cr:hor20,o:hor50"
 
--- Тема
--- Устанавливается через плагин, пока используем встроенную тёмную
-vim.cmd.colorscheme("habamax")
+-- Прозрачный фон — подхватывает тему терминала
+vim.cmd([[
+  highlight Normal guibg=NONE ctermbg=NONE
+  highlight NonText guibg=NONE ctermbg=NONE
+  highlight LineNr guibg=NONE ctermbg=NONE
+  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+]])
 
 -- Клавиши
-vim.g.mapleader = " "           -- leader клавиша — пробел
+vim.g.mapleader = " "           -- leader клавиша — пробел (Space)
 
--- Нормальная вставка в insert режиме
+-- Вставка из системного буфера (только macOS)
 vim.keymap.set("i", "<D-v>", "<C-r>+", { desc = "Paste from clipboard" })
+-- <D-v> = Cmd+V, <C-r>+ = вставить из системного буфера в insert режиме
 
--- Сохранить
-vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save" })
+-- Сохранить / Выйти
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save" }) -- Space+w — сохранить файл
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" }) -- Space+q — выйти
 
--- Выйти
-vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
-
--- Перемещение между панелями
+-- Перемещение между панелями (вместо Ctrl+W затем h/j/k/l)
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left pane" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right pane" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom pane" })

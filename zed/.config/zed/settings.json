@@ -9,19 +9,19 @@
 {
   "cli_default_open_behavior": "new_window",
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "agent": {
     "dock": "right",
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "git_panel": {
     "tree_view": false,
-    "dock": "left"
+    "dock": "left",
   },
   "base_keymap": "VSCode",
   // "vim_mode": true,
@@ -71,7 +71,7 @@
   "ui_font_size": 17,
   "ui_font_family": ".SystemUIFont",
   "buffer_font_size": 16, // or 18
-  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_line_height": { "custom": 1.4 },
   "buffer_font_features": { "calt": false },
   "buffer_font_weight": 300,
@@ -93,6 +93,9 @@
   "when_closing_with_no_tabs": "keep_window_open",
   "preview_tabs": {
     "enabled": false,
+  },
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font Mono",
   },
   "extend_comment_on_newline": false,
   "languages": {

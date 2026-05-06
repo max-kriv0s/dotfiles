@@ -43,4 +43,5 @@ vi_mode_style = { shape = "Block", blinking = "Never" }
 bindings = [
   { key = "Left",  mods = "Alt", chars = "\x1bb" },
   { key = "Right", mods = "Alt", chars = "\x1bf" },
+  { key = "Return", mods = "Shift", chars = "\x1b[27;2;13~" }
 ]

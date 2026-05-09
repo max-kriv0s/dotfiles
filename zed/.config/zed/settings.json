@@ -70,11 +70,11 @@
   },
   "ui_font_size": 17,
   "ui_font_family": ".SystemUIFont",
-  "buffer_font_size": 16, // or 18
+  "buffer_font_size": 17, // or 18
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_line_height": { "custom": 1.4 },
   "buffer_font_features": { "calt": false },
-  "buffer_font_weight": 300,
+  "buffer_font_weight": 500,
   "agent_ui_font_size": 16,
   "agent_buffer_font_size": 16,
   "current_line_highlight": "none",
@@ -96,6 +96,8 @@
   },
   "terminal": {
     "font_family": "JetBrainsMono Nerd Font Mono",
+    "font_weight": 500,
+    "font_size": 17,
   },
   "extend_comment_on_newline": false,
   "languages": {

@@ -80,3 +80,8 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 export FZF_DEFAULT_OPTS="-i"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/maxim/.lmstudio/bin"
+# End of LM Studio CLI section
+

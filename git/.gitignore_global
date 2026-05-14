@@ -5,6 +5,7 @@
 # Editors
 .idea/
 .vscode/
+.zed/
 *.swp
 *.swo
 

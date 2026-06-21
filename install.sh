@@ -5,6 +5,40 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OS="$(uname -s)"
 
+if [[ "$OS" == "Darwin" ]]; then
+  # Homebrew
+  if ! command -v brew &>/dev/null; then
+    echo "--> Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+fi
+
+# ──────────────────────────────────────────────────────
+# zsh
+# ──────────────────────────────────────────────────────
+if ! command -v zsh &>/dev/null; then
+  echo "--> zsh not found, installing..."
+
+  if [[ "$OS" == "Linux" ]]; then
+    sudo dnf install -y zsh
+  elif [[ "$OS" == "Darwin" ]]; then
+    brew install zsh
+  fi
+fi
+
+ZSH_PATH="$(command -v zsh)"
+CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7 2>/dev/null || true)"
+
+if [[ "$CURRENT_SHELL" != "$ZSH_PATH" ]]; then
+  echo "--> Setting zsh as default shell..."
+  chsh -s "$ZSH_PATH" "$USER"
+
+  echo ""
+  echo "⚠️ Please re-login or restart terminal"
+  exit 0
+fi
+# ──────────────────────────────────────────────────────
+
 echo "==> Dotfiles bootstrap | OS: $OS | Dir: $DOTFILES"
 
 # ──────────────────────────────────────────────────────
@@ -59,9 +93,9 @@ PACKAGES=(
 )
 
 for pkg in "${PACKAGES[@]}"; do
-  if [[ -d "$pkg" ]]; then
+  if [[ -d "$DOTFILES/$pkg" ]]; then
     echo "  ✓ stow $pkg"
-    stow --restow "$pkg"
+    stow --dir="$DOTFILES" --target="$HOME" --restow "$pkg"
   fi
 done
 
@@ -88,11 +122,13 @@ fi
 # Node (через fnm)
 # ──────────────────────────────────────────────────────
 if command -v fnm &>/dev/null; then
-  eval "$(fnm env --shell bash)"
-  if ! fnm list | grep -q "v22"; then
-    echo "--> Installing Node LTS..."
-    fnm install --lts
-    fnm default lts-latest
+  echo "--> fnm detected, initializing..."
+
+  # только если fnm реально работает
+  if fnm --version &>/dev/null; then
+    fnm install --lts || true
+    fnm default lts-latest || true
+    fnm use lts-latest || true
   fi
 fi
 
@@ -100,30 +136,6 @@ fi
 if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
   echo "--> Installing TPM..."
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
-
-# ── oh-my-zsh ────────────────────────────────────────────────────────────────
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  echo "--> Installing oh-my-zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
-
-# ── powerlevel10k ─────────────────────────────────────────────────────────────
-if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
-  echo "--> Installing powerlevel10k..."
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-    ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-fi
-
-# ── zsh plugins ──────────────────────────────────────────────────────────────
-if [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions \
-    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
-if [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-    ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 fi
 
 # VS Code

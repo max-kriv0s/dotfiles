@@ -19,14 +19,17 @@ FLATPAKS=(
   md.obsidian.Obsidian          # Obsidian
   org.keepassxc.KeePassXC       # менеджер паролей
   com.brave.Browser             # Brave Browser
-  org.mozilla.firefox           # Firefox
-  io.github.zen_browser.zen     # Zen Browser
-  com.gitlab.davem.DBeaver      # DBeaver
-  io.tableplus.TablePlus        # TablePlus
-  io.beekeeperstudio.Bruno      # Bruno (замена Postman)
+  app.zen_browser.zen	        # Zen Browser
+  ru.yandex.Browser		# Yandex Browser
+  io.dbeaver.DBeaverCommunity   # DBeaver
+  com.usebruno.Bruno	        # Bruno (замена Postman)
 )
 
 for pkg in "${FLATPAKS[@]}"; do
-  echo "  → $pkg"
-  flatpak install -y flathub "$pkg"
-done#!/usr/bin/env bash
+  if flatpak list --app | awk '{print $1}' | grep -q "^$pkg$"; then
+    echo "  → already installed: $pkg"
+  else
+    echo "  → installing $pkg"
+    flatpak install -y flathub "$pkg"
+  fi
+done

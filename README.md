@@ -65,6 +65,7 @@ chmod +x install.sh
 2. Запусти `p10k configure` — настройка промпта
 3. В tmux нажми `Ctrl+B I` — установка плагинов
 4. Установи node через fnm: `fnm install --lts && fnm default lts-latest`
+5. Установить редактор zed `https://zed.dev/download`
 
 ## Manual Installation
 

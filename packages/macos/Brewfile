@@ -12,7 +12,7 @@ cask "alacritty"             # запасной терминал
 cask "font-jetbrains-mono-nerd-font"  # основной шрифт с иконками
 
 # ── Shell ────────────────────────────────────────────────────────────────────
-brew "zsh"                   # shell (проверь что стоит как default)
+#brew "zsh"                   # shell (проверь что стоит как default)
 brew "stow"                  # управление симлинками dotfiles
 brew "tmux"             	 # терминальный мультиплексор
 

@@ -85,3 +85,8 @@ eval "$(zoxide init --cmd cd zsh)"
 export PATH="$PATH:/Users/maxim/.lmstudio/bin"
 # End of LM Studio CLI section
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  # Ghostty Wayland preference
+  export GHOSTTY_WAYLAND=1
+fi
+

@@ -2,39 +2,39 @@
 
 Эти инструменты недоступны в DNF/Flatpak и устанавливаются вручную.
 
-## Browsers
+## Установка шрифта JetBrains Mono
+скачиваем https://www.jetbrains.com/lp/mono/ , потом разархивируем
+```bash
+mkdir -p ~/.local/share/fonts/jetbrains-mono
+cp ttf/*.ttf ~/.local/share/fonts/jetbrains-mono/
 
-### Zen Browser
-Privacy-focused browser based on Firefox.
-https://zen-browser.app
+fc-cache -fv # обновление кеша
+fc-list | grep -i "JetBrains" # проверка 
+```
 
-## System Monitoring
+скачиваем nerd-fonts `curl -LO https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip`
+```bash
+mkdir -p ~/.local/share/fonts/jetbrains-nerd
+cp *Mono-Regular.ttf ~/.local/share/fonts/jetbrains-nerd/
+cp *Mono-Bold.ttf ~/.local/share/fonts/jetbrains-nerd/
+cp *Mono-Italic.ttf ~/.local/share/fonts/jetbrains-nerd/
+cp *Mono-BoldItalic.ttf ~/.local/share/fonts/jetbrains-nerd/
+fc-cache -fv
+```
 
-### MoniThor
-Menu bar system monitor (macOS only).
-
-### MacVitals
-System health monitor (macOS only).
-
-## Obsidian CLI
-
-Obsidian CLI поставляется вместе с приложением Obsidian.
-После установки добавь его в PATH:
-
-\```bash
-# Добавь в ~/.zshrc.local
-export PATH="$PATH:~/.local/bin"
-# или где лежит бинарник после установки Obsidian на Linux
-\```
 
 ## VS Code
 
 Flatpak версия не рекомендуется — проблемы с расширениями и путями.
 Ставить через официальный репозиторий Microsoft:
 
+https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
+
 ```bash
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+
+dnf check-update &&
 sudo dnf install code
 ```
 

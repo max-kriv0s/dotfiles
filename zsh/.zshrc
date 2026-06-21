@@ -55,6 +55,7 @@ source ~/.config/zsh/functions.zsh
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^[[3~' delete-char
 
 # History
 HISTSIZE=1000 # 5000

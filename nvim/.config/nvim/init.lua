@@ -3,7 +3,12 @@ vim.opt.number = true           -- номера строк
 vim.opt.relativenumber = true   -- относительные номера строк
 vim.opt.mouse = "a"             -- мышь
 vim.opt.clipboard = "unnamedplus" -- системный буфер обмена
-vim.opt.wrap = false            -- не переносить строки
+
+-- Перенос строк и слов
+vim.opt.wrap = true             -- переносить строки
+vim.opt.linebreak = true
+vim.opt.breakindent = true
+
 vim.opt.tabstop = 2             -- размер таба
 vim.opt.shiftwidth = 2          -- отступ
 vim.opt.expandtab = true        -- табы как пробелы

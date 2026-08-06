@@ -2,7 +2,7 @@
 alias dotfiles="cd ~/dotfiles"
 
 # Замены стандартных утилит
-alias ls="eza --tree --level=1 --icons=always --no-time"
+alias ls="eza --tree --level=1 --icons=always --time-style='+%d %b %H:%M'"
 
 # Git
 alias g="git"

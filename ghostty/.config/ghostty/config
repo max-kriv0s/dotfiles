@@ -37,4 +37,31 @@ cursor-opacity = 0.9
 macos-option-as-alt = true
 
 # [keybind]
+keybind = shift+enter=text:\x1b[13;2u
 
+# Дубли основных сочетаний через физические коды клавиш (W3C UI Events).
+# Обычные keybind = super+c=... матчатся по символу, который зависит от
+# раскладки (на RU-раскладке super+c это по факту super+с). Физические коды
+# (KeyC и т.п.) матчат физическую клавишу независимо от раскладки и имеют
+# приоритет над буквенными триггерами — можно смело добавлять поверх дефолтов.
+keybind = super+KeyC=copy_to_clipboard:mixed
+keybind = super+KeyV=paste_from_clipboard
+keybind = super+KeyT=new_tab
+keybind = super+KeyN=new_window
+keybind = super+KeyW=close_surface
+keybind = super+KeyD=new_split:right
+keybind = super+shift+KeyD=new_split:down
+keybind = super+KeyA=select_all
+keybind = super+KeyK=clear_screen
+keybind = super+KeyF=start_search
+keybind = super+KeyE=search_selection
+keybind = super+shift+KeyF=end_search
+keybind = super+KeyZ=undo
+keybind = super+shift+KeyZ=redo
+keybind = super+KeyQ=quit
+keybind = super+Comma=open_config
+keybind = super+shift+Comma=reload_config
+keybind = super+BracketLeft=goto_split:previous
+keybind = super+BracketRight=goto_split:next
+keybind = super+shift+BracketLeft=previous_tab
+keybind = super+shift+BracketRight=next_tab

@@ -27,7 +27,17 @@ if ! command -v zsh &>/dev/null; then
 fi
 
 ZSH_PATH="$(command -v zsh)"
-CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7 2>/dev/null || true)"
+
+if [[ "$OS" == "Darwin" ]]; then
+  CURRENT_SHELL="$(dscl . -read "/Users/$USER" UserShell | awk '{print $2}')"
+else
+  CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7)"
+fi
+
+if [[ -z "$CURRENT_SHELL" ]]; then
+  echo "✗ Could not determine current shell for user $USER" >&2
+  exit 1
+fi
 
 if [[ "$CURRENT_SHELL" != "$ZSH_PATH" ]]; then
   echo "--> Setting zsh as default shell..."

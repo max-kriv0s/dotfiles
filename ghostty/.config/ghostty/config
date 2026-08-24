@@ -65,3 +65,24 @@ keybind = super+BracketLeft=goto_split:previous
 keybind = super+BracketRight=goto_split:next
 keybind = super+shift+BracketLeft=previous_tab
 keybind = super+shift+BracketRight=next_tab
+
+# Ctrl+буква — раскладко-независимые управляющие коды для шелла.
+# По умолчанию Ghostty считает control-байт из символа ТЕКУЩЕЙ раскладки:
+# на русской раскладке физическая клавиша C даёт кириллическую «с», для
+# которой корректного control-байта не существует — Ctrl+C/Ctrl+D и т.п.
+# просто не отправляют в шелл ничего. Бинды ниже — по физической клавише,
+# всегда шлют классический control-байт независимо от раскладки.
+# начало строки (readline) + префикс tmux
+keybind = ctrl+KeyA=text:\x01
+# SIGINT — прервать процесс
+keybind = ctrl+KeyC=text:\x03
+# EOF / выйти из шелла
+keybind = ctrl+KeyD=text:\x04
+# конец строки (readline)
+keybind = ctrl+KeyE=text:\x05
+# очистить экран
+keybind = ctrl+KeyL=text:\x0c
+# обратный поиск по истории
+keybind = ctrl+KeyR=text:\x12
+# отправить процесс в фон (suspend)
+keybind = ctrl+KeyZ=text:\x1a

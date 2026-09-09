@@ -34,6 +34,7 @@ PACKAGES=(
 
   # ── Dev: языки ──────────────────────────────────────────────────────────────
   golang               # Go (на fedora называется golang)
+  lua                  # Lua
 )
 
 echo "--> Installing packages..."

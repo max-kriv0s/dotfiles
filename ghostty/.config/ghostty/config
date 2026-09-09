@@ -86,3 +86,30 @@ keybind = ctrl+KeyL=text:\x0c
 keybind = ctrl+KeyR=text:\x12
 # отправить процесс в фон (suspend)
 keybind = ctrl+KeyZ=text:\x1a
+# на символ назад / вперёд (readline)
+keybind = ctrl+KeyB=text:\x02
+keybind = ctrl+KeyF=text:\x06
+# отмена текущего действия (readline abort, выход из fzf)
+keybind = ctrl+KeyG=text:\x07
+# удалить до конца строки
+keybind = ctrl+KeyK=text:\x0b
+# удалить всю строку до курсора
+keybind = ctrl+KeyU=text:\x15
+# удалить слово перед курсором
+keybind = ctrl+KeyW=text:\x17
+# вставить удалённое (yank)
+keybind = ctrl+KeyY=text:\x19
+# поменять символы местами (transpose)
+keybind = ctrl+KeyT=text:\x14
+# предыдущая / следующая команда в истории
+keybind = ctrl+KeyP=text:\x10
+keybind = ctrl+KeyN=text:\x0e
+
+# Alt+буква — та же проблема, но для word-motion в readline.
+# macos-option-as-alt = true шлёт ESC + символ текущей раскладки, поэтому на
+# RU получается ESC + кириллица. Физические коды шлют ESC + латинскую букву.
+# на слово назад / вперёд
+keybind = alt+KeyB=text:\x1bb
+keybind = alt+KeyF=text:\x1bf
+# удалить слово после курсора
+keybind = alt+KeyD=text:\x1bd

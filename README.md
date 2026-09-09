@@ -12,6 +12,7 @@ dotfiles/
 ├── nvim/                         # Neovim config
 ├── docs/
 │   ├── tools.md                  # Terminal tools cheatsheet
+│   ├── brew.md                   # Homebrew + updating macOS apps
 │   ├── git.md                    # Git cheatsheet
 │   ├── tmux.md                   # Tmux cheatsheet
 │   └── nvim.md                   # Neovim cheatsheet
@@ -93,6 +94,7 @@ On first run `install.sh` creates them from examples:
 ## Docs
 
 - [Terminal tools](docs/tools.md)
+- [Homebrew & updates](docs/brew.md)
 - [Git](docs/git.md)
 - [Tmux](docs/tmux.md)
 - [Neovim](docs/nvim.md)

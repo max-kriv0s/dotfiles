@@ -43,6 +43,7 @@ brew "yazi"                  # TUI файловый менеджер
 brew "fnm"                   # Node Version Manager
 brew "uv"                    # Python менеджер
 brew "go"                    # Golang
+brew "lua"                   # Lua
 
 # ── Dev: утилиты ─────────────────────────────────────────────────────────────
 brew "go-task"               # таск-раннер (Taskfile.yml), замена Makefile

@@ -142,6 +142,12 @@ if command -v fnm &>/dev/null; then
   fi
 fi
 
+# ── Тема (симлинк ~/.config/theme/current) ────────────────────────────────────
+if [[ -x "$DOTFILES/scripts/theme/change-theme" ]]; then
+  echo "--> Initializing theme..."
+  "$DOTFILES/scripts/theme/change-theme" init
+fi
+
 # ── TPM (Tmux Plugin Manager) ─────────────────────────────────────────────────
 if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
   echo "--> Installing TPM..."

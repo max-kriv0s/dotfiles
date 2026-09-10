@@ -1,0 +1,201 @@
+#!/usr/bin/env sh
+
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+DOTFILES_DIR=$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd)
+THEMES_DIR="$SCRIPT_DIR/themes"
+CURRENT_LINK="${XDG_CONFIG_HOME:-$HOME/.config}/theme/current"
+DEFAULT_THEME=kanagawa
+VSCODE_SETTINGS="$DOTFILES_DIR/vscode/settings.json"
+ZED_SETTINGS="$DOTFILES_DIR/zed/.config/zed/settings.json"
+
+mkdir -p "$(dirname -- "$CURRENT_LINK")"
+
+usage() {
+  printf 'Usage: change-theme current|list|next|init|set <theme>\n' >&2
+}
+
+list_themes() {
+  for dir in "$THEMES_DIR"/*/; do
+    if [ -d "$dir" ]; then
+      basename -- "$dir"
+    fi
+  done
+}
+
+is_known_theme() {
+  [ -d "$THEMES_DIR/$1" ]
+}
+
+current_theme() {
+  if [ ! -L "$CURRENT_LINK" ]; then
+    printf 'No theme selected: %s is not a symlink\n' "$CURRENT_LINK" >&2
+    printf 'Run: change-theme init\n' >&2
+    exit 1
+  fi
+
+  theme=$(basename -- "$(readlink -- "$CURRENT_LINK")")
+
+  if ! is_known_theme "$theme"; then
+    printf 'Broken theme link: %s -> %s\n' "$CURRENT_LINK" "$theme" >&2
+    exit 1
+  fi
+
+  printf '%s\n' "$theme"
+}
+
+# Значение для приложения — первая строка файла themes/<theme>/<app>
+theme_value() {
+  file="$THEMES_DIR/$1/$2"
+
+  if [ ! -f "$file" ]; then
+    printf 'Missing %s value: %s\n' "$2" "$file" >&2
+    exit 1
+  fi
+
+  value=$(sed -n '1p' "$file")
+
+  # Значение подставляется в sed и в JSON — допускаем только безопасные символы
+  case "$value" in
+    "" | *[!A-Za-z0-9\ ._-]*)
+      printf 'Invalid value in %s: %s\n' "$file" "$value" >&2
+      exit 1
+      ;;
+  esac
+
+  printf '%s\n' "$value"
+}
+
+# Меняет строку в JSONC-конфиге, сохраняя комментарии и форматирование
+patch_setting() {
+  file="$1"
+  expr="$2"
+  value="$3"
+
+  if [ ! -f "$file" ]; then
+    printf 'Settings file not found: %s\n' "$file" >&2
+    exit 1
+  fi
+
+  updated=$(sed "$expr" "$file")
+  printf '%s\n' "$updated" > "$file"
+
+  if ! grep -qF "\"$value\"" "$file"; then
+    printf 'Failed to set theme in %s\n' "$file" >&2
+    exit 1
+  fi
+}
+
+# Alacritty следит за реальным путём импортированного файла и смены симлинка не видит,
+# поэтому трогаем основной конфиг — mtime меняется, содержимое нет
+reload_alacritty() {
+  alacritty_config="${XDG_CONFIG_HOME:-$HOME/.config}/alacritty/alacritty.toml"
+
+  if [ -f "$alacritty_config" ]; then
+    touch "$alacritty_config"
+  fi
+}
+
+# comm — имя процесса без аргументов, поэтому посторонние процессы вроде
+# nvim .../ghostty/config сигнал не получат
+reload_ghostty() {
+  ps -u "$(id -u)" -o pid= -o comm= | while read -r pid comm; do
+    if [ "${comm##*/}" = "ghostty" ]; then
+      kill -USR2 "$pid" 2>/dev/null || true
+    fi
+  done
+}
+
+set_theme() {
+  theme="$1"
+
+  if ! is_known_theme "$theme"; then
+    printf 'Unknown theme: %s\n' "$theme" >&2
+    printf 'Available themes: %s\n' "$(list_themes | tr '\n' ' ')" >&2
+    exit 1
+  fi
+
+  # Значения читаем до первой записи, чтобы не оставить настройки в полусмене
+  nvim_value=$(theme_value "$theme" nvim)
+  vscode_value=$(theme_value "$theme" vscode)
+  zed_value=$(theme_value "$theme" zed)
+
+  ln -sfn "$THEMES_DIR/$theme" "$CURRENT_LINK"
+
+  patch_setting "$VSCODE_SETTINGS" \
+    "s|\(\"workbench.colorTheme\"[[:space:]]*:[[:space:]]*\)\"[^\"]*\"|\1\"$vscode_value\"|" \
+    "$vscode_value"
+
+  patch_setting "$ZED_SETTINGS" \
+    "/\"theme\"[[:space:]]*:/,/}/ s|\(\"dark\"[[:space:]]*:[[:space:]]*\)\"[^\"]*\"|\1\"$zed_value\"|" \
+    "$zed_value"
+
+  reload_alacritty
+  reload_ghostty
+
+  printf 'Theme changed to: %s\n' "$theme"
+  printf 'Neovim: %s\n' "$nvim_value"
+  printf 'VS Code: %s\n' "$vscode_value"
+  printf 'Zed: %s\n' "$zed_value"
+}
+
+next_theme() {
+  current=$(current_theme)
+  first=""
+  found=""
+
+  for theme in $(list_themes); do
+    if [ -z "$first" ]; then
+      first="$theme"
+    fi
+
+    if [ -n "$found" ]; then
+      printf '%s\n' "$theme"
+      return
+    fi
+
+    if [ "$theme" = "$current" ]; then
+      found=1
+    fi
+  done
+
+  printf '%s\n' "$first"
+}
+
+init_theme() {
+  if [ -L "$CURRENT_LINK" ] && [ -d "$CURRENT_LINK" ]; then
+    printf 'Theme already set: %s\n' "$(current_theme)"
+    return
+  fi
+
+  set_theme "$DEFAULT_THEME"
+}
+
+case "${1:-current}" in
+  current)
+    current_theme
+    ;;
+  list)
+    list_themes
+    ;;
+  next)
+    next=$(next_theme) || exit 1
+    set_theme "$next"
+    ;;
+  init)
+    init_theme
+    ;;
+  set)
+    if [ "$#" -ne 2 ]; then
+      usage
+      exit 1
+    fi
+
+    set_theme "$2"
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac

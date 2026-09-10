@@ -1,0 +1,4 @@
+[general]
+import = [
+  "~/.config/alacritty/themes/kanagawa-dragon.toml",
+]

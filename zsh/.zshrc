@@ -36,6 +36,10 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
+# Корень dotfiles — из симлинка ~/.zshrc, работает при любом расположении репо
+export DOTFILES="${${(%):-%x}:A:h:h}"
+[[ -d "$DOTFILES/scripts" ]] || export DOTFILES="$HOME/dotfiles"
+
 # Exports
 source ~/.config/zsh/exports.zsh
 
@@ -46,7 +50,7 @@ source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/functions.zsh
 
 # Local (машино-специфичное)
-[[ -f ~/dotfiles/local/.zshrc.local ]] && source ~/dotfiles/local/.zshrc.local
+[[ -f "$DOTFILES/local/.zshrc.local" ]] && source "$DOTFILES/local/.zshrc.local"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

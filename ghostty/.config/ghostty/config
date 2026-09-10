@@ -8,11 +8,7 @@ font-size = 17
 font-thicken = true
 
 # [theme]
-# Catppuccin Mocha
-#theme = Catppuccin Mocha
-
-# Kanagawa Dragon
-theme = Kanagawa Dragon
+config-file = ~/.config/theme/current/ghostty
 
 # [window]
 window-width = 110

@@ -4,8 +4,7 @@ TERM = "xterm-256color"
 
 [general]
 import = [
-  "~/.config/alacritty/themes/kanagawa-dragon.toml",
-  #"~/.config/alacritty/themes/catppuccin-mocha.toml",
+  "~/.config/theme/current/alacritty.toml",
 ]
 
 # ── Font ──────────────────────────────────────────────────────────────────────

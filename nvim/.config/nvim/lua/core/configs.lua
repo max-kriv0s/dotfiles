@@ -38,4 +38,17 @@ vim.opt.swapfile = false     -- отключить swap файлы
 
 -- Other
 vim.opt.scrolloff = 8        -- отступ при прокрутке
+vim.opt.showmode = false     -- режим показывает lualine
 vim.opt.termguicolors = true -- true color
+
+-- Fillchars
+vim.opt.fillchars = {
+	vert = "│",
+	fold = "⠀",
+	eob = " ", -- suppress ~ at EndOfBuffer
+	-- diff = "⣿", -- alternatives = ⣿ ░ ─ ╱
+	msgsep = "‾",
+	foldopen = "▾",
+	foldsep = "│",
+	foldclose = "▸",
+}

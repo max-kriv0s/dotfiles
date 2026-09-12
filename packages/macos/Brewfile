@@ -44,6 +44,7 @@ brew "fnm"    				 # быстрый Node Version Manager (замена nvm, со
 brew "uv"                    # Python менеджер (замена pip + pyenv + venv)
 brew "go"                    # Golang
 brew "lua"                   # Lua
+brew "tree-sitter-cli"       # CLI для сборки parsers nvim-treesitter
 
 # ── Dev: утилиты ─────────────────────────────────────────────────────────────
 brew "go-task"               # таск-раннер (Taskfile.yml), замена Makefile

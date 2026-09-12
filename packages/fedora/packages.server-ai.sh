@@ -41,6 +41,7 @@ PACKAGES=(
   # Dev languages / build tools
   golang
   lua
+  tree-sitter-cli
   make
   gcc
   gcc-c++

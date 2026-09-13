@@ -4,7 +4,8 @@ TERM = "xterm-256color"
 
 [general]
 import = [
-  "~/.config/theme/current/alacritty.toml",
+#  "~/.config/theme/current/alacritty.toml",
+  "~/.config/alacritty/themes/coolnight.toml",
 ]
 
 # ── Font ──────────────────────────────────────────────────────────────────────
@@ -12,24 +13,29 @@ import = [
 size = 17.0
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"
+# family = "JetBrainsMono Nerd Font"
+family = "MesloLGS Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "JetBrainsMono Nerd Font"
+# family = "JetBrainsMono Nerd Font"
+family = "MesloLGS Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font"
+# family = "JetBrainsMono Nerd Font"
+family = "MesloLGS Nerd Font Mono"
 style = "Italic"
 
 # ── Window ────────────────────────────────────────────────────────────────────
 [window]
 dimensions = { columns = 110, lines = 32 }
-padding = { x = 12, y = 12 }
+padding = { x = 10, y = 10 }
 #decorations = "None"	# "None" — скрыть шапку как в ghostty
 decorations = "Full"
-opacity = 0.92
+opacity = 0.8
+blur = true
+option_as_alt = "Both"
 
 # ── Cursor ────────────────────────────────────────────────────────────────────
 [cursor]
@@ -40,7 +46,45 @@ vi_mode_style = { shape = "Block", blinking = "Never" }
 # Option как Alt (как macos-option-as-alt в ghostty)
 [keyboard]
 bindings = [
-  { key = "Left",  mods = "Alt", chars = "\x1bb" },
-  { key = "Right", mods = "Alt", chars = "\x1bf" },
-  { key = "Return", mods = "Shift", chars = "\x1b[27;2;13~" }
+  # Дубли стандартных сочетаний только для русской ЙЦУКЕН-раскладки.
+  # Английские дефолты Alacritty остаются без изменений.
+  { key = "с", mods = "Command", action = "Copy" },
+  { key = "м", mods = "Command", action = "Paste" },
+  { key = "е", mods = "Command", action = "CreateNewTab" },
+  { key = "т", mods = "Command", action = "CreateNewWindow" },
+  { key = "ц", mods = "Command", action = "Quit" },
+  { key = "л", mods = "Command", chars = "\u000c" },
+  { key = "л", mods = "Command", action = "ClearHistory" },
+  { key = "а", mods = "Command", action = "SearchForward" },
+  { key = "а", mods = "Command|Shift", mode = "Search", action = "SearchConfirm" },
+  { key = "й", mods = "Command", action = "Quit" },
+  { key = "х", mods = "Command|Shift", action = "SelectPreviousTab" },
+  { key = "ъ", mods = "Command|Shift", action = "SelectNextTab" },
+
+  # Ctrl-команды shell/tmux в русской раскладке.
+  { key = "ф", mods = "Control", chars = "\u0001" },
+  { key = "с", mods = "Control", chars = "\u0003" },
+  { key = "в", mods = "Control", chars = "\u0004" },
+  { key = "у", mods = "Control", chars = "\u0005" },
+  { key = "д", mods = "Control", chars = "\u000c" },
+  { key = "к", mods = "Control", chars = "\u0012" },
+  { key = "я", mods = "Control", chars = "\u001a" },
+  { key = "и", mods = "Control", chars = "\u0002" },
+  { key = "а", mods = "Control", chars = "\u0006" },
+  { key = "п", mods = "Control", chars = "\u0007" },
+  { key = "л", mods = "Control", chars = "\u000b" },
+  { key = "г", mods = "Control", chars = "\u0015" },
+  { key = "ц", mods = "Control", chars = "\u0017" },
+  { key = "н", mods = "Control", chars = "\u0019" },
+  { key = "е", mods = "Control", chars = "\u0014" },
+  { key = "з", mods = "Control", chars = "\u0010" },
+  { key = "т", mods = "Control", chars = "\u000e" },
+
+  # Option-команды readline в русской раскладке.
+  { key = "и", mods = "Option", chars = "\u001bb" },
+  { key = "а", mods = "Option", chars = "\u001bf" },
+  { key = "в", mods = "Option", chars = "\u001bd" },
+# { key = "Left",  mods = "Alt", chars = "\x1bb" },
+# { key = "Right", mods = "Alt", chars = "\x1bf" },
+  { key = "Return", mods = "Shift", chars = "\x1b[13;2u" }
 ]

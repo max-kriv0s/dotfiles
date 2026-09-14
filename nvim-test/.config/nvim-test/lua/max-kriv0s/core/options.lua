@@ -2,6 +2,26 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt -- for conciseness
 
+local function langmap(from, to)
+  return from .. ";" .. vim.fn.escape(to, [[;,."|\\]])
+end
+
+local is_macos = vim.uv.os_uname().sysname == "Darwin"
+local english_lower = "qwertyuiopasdfghjkl;zxcvbnm"
+local english_upper = "QWERTYUIOPASDFGHJKL:ZXCVBNM"
+
+if is_macos then
+  opt.langmap = table.concat({
+    langmap("йцукенгшщзфывапролджячсмить", english_lower),
+    langmap("ЙЦУКЕНГШЩЗФЫВАПРОЛДЖЯЧСМИТЬ", english_upper),
+  }, ",")
+else
+  opt.langmap = table.concat({
+    langmap("ёйцукенгшщзхъфывапролджэячсмить", "`" .. english_lower),
+    langmap("ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬ", "~" .. english_upper),
+  }, ",")
+end
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)

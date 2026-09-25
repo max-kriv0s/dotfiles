@@ -23,10 +23,23 @@ if ! command -v stow &>/dev/null; then
 fi
 
 echo "--> Linking dotfiles..."
-stow zsh
-stow git
-stow tmux
-stow nvim
+cd "$DOTFILES"
+
+# Серверный набор: без графики, поэтому нет ghostty, alacritty и zed
+PACKAGES=(
+  zsh
+  git
+  tmux
+  nvim
+  lazygit
+)
+
+for pkg in "${PACKAGES[@]}"; do
+  if [[ -d "$DOTFILES/$pkg" ]]; then
+    echo "  v stow $pkg"
+    stow --dir="$DOTFILES" --target="$HOME" --restow "$pkg"
+  fi
+done
 
 if command -v zsh &>/dev/null && [[ "${SHELL:-}" != "$(command -v zsh)" ]]; then
   echo "--> Changing default shell to zsh..."

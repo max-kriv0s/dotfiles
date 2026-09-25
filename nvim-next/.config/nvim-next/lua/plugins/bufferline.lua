@@ -59,4 +59,22 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    require("bufferline").setup(opts)
+
+    local map = require("core.lang").map
+
+    -- Именно команды bufferline, а не :bnext — они ходят по тому списку,
+    -- который показан в полосе, и скрытые буферы пропускают
+    map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Следующий буфер" })
+    map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Предыдущий буфер" })
+
+    -- Своей команды "закрыть текущий буфер" у bufferline нет, поэтому здесь
+    -- штатная :bdelete — но держим её рядом с остальной группой <leader>b
+    map("n", "<leader>bx", "<cmd>bdelete<CR>", { desc = "Закрыть буфер" })
+    map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "Закрыть остальные буферы" })
+    map("n", "<leader>ba", "<cmd>%bdelete<CR>", { desc = "Закрыть все буферы" })
+    map("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Выбрать буфер по букве" })
+    map("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Закрыть буфер по букве" })
+  end,
 }

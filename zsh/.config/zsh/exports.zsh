@@ -24,6 +24,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   fi
 fi
 
+# lazygit на macOS ищет конфиг в ~/Library/Application Support/lazygit,
+# а не в ~/.config. Указываем путь явно, чтобы на обеих системах
+# использовался один и тот же файл из dotfiles.
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+
 # zsh completions (brew)
 if command -v brew &>/dev/null; then
   fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)

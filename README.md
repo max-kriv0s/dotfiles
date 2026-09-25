@@ -15,7 +15,7 @@ dotfiles/
 │   ├── brew.md                   # Homebrew + updating macOS apps
 │   ├── git.md                    # Git cheatsheet
 │   ├── tmux.md                   # Tmux cheatsheet
-│   └── nvim.md                   # Neovim cheatsheet
+│   └── nvim/                     # Neovim: справочник, клавиши, сценарии, плагины
 ├── packages/
 │   ├── macos/
 │   │   ├── Brewfile              # Homebrew packages
@@ -97,4 +97,4 @@ On first run `install.sh` creates them from examples:
 - [Homebrew & updates](docs/brew.md)
 - [Git](docs/git.md)
 - [Tmux](docs/tmux.md)
-- [Neovim](docs/nvim.md)
+- [Neovim](docs/nvim/README.md)

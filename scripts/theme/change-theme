@@ -107,6 +107,16 @@ reload_ghostty() {
   done
 }
 
+# nvim перечитывает themes/<theme>/nvim по сигналу USR1.
+# comm — имя процесса без аргументов, как и в reload_ghostty
+reload_nvim() {
+  ps -u "$(id -u)" -o pid= -o comm= | while read -r pid comm; do
+    if [ "${comm##*/}" = "nvim" ]; then
+      kill -USR1 "$pid" 2>/dev/null || true
+    fi
+  done
+}
+
 set_theme() {
   theme="$1"
 
@@ -133,6 +143,7 @@ set_theme() {
 
   reload_alacritty
   reload_ghostty
+  reload_nvim
 
   printf 'Theme changed to: %s\n' "$theme"
   printf 'Neovim: %s\n' "$nvim_value"

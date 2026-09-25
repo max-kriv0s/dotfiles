@@ -3,6 +3,7 @@
 
 [colors.primary]
 background = "#1E1E2E"
+#background = "#181825"
 foreground = "#CDD6F4"
 
 [colors.normal]

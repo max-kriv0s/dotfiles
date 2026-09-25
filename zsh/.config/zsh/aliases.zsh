@@ -2,7 +2,7 @@
 alias dotfiles="cd $DOTFILES"
 
 # Editors
-alias nv="nvim"
+alias nv="NVIM_APPNAME=nvim-next nvim"
 alias nv-test="NVIM_APPNAME=nvim-test nvim"
 
 # Theme

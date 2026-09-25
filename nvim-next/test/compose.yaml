@@ -1,0 +1,20 @@
+# LSP: docker_compose_language_service + yamlls.
+# Проверка правил из core/filetypes.lua: :echo &filetype -> yaml.docker-compose
+# После подключения SchemaStore здесь заработает автодополнение ключей.
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+  api:
+    build: .
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+
+volumes:
+  data:

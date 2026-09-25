@@ -36,6 +36,10 @@ PACKAGES=(
   golang               # Go (на fedora называется golang)
   lua                  # Lua
   tree-sitter-cli      # CLI для сборки parsers nvim-treesitter
+
+  # ── Dev: линтеры и безопасность ─────────────────────────────────────────────
+  ShellCheck           # линтер shell-скриптов (в Fedora имя с заглавными)
+                       # hadolint и trivy ставятся ниже — их нет в репозиториях
 )
 
 echo "--> Installing packages..."
@@ -104,6 +108,34 @@ fi
 if ! command -v uv &>/dev/null; then
   echo "--> Installing uv..."
   curl -LsSf https://astral.sh/uv/install.sh | sh
+fi
+
+# hadolint — линтер Dockerfile (не в DNF, бинарник с GitHub Releases)
+if ! command -v hadolint &>/dev/null; then
+  echo "--> Installing hadolint..."
+
+  # latest — чтобы не отставать от версии, которую ставит brew на macOS
+  sudo curl -fsSL -o /usr/local/bin/hadolint \
+    "https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64"
+  sudo chmod +x /usr/local/bin/hadolint
+fi
+
+# trivy — сканер уязвимостей (официальный репозиторий Aqua Security)
+if ! command -v trivy &>/dev/null; then
+  echo "--> Installing trivy..."
+
+  if [[ ! -f /etc/yum.repos.d/trivy.repo ]]; then
+    sudo tee /etc/yum.repos.d/trivy.repo >/dev/null <<'EOF'
+[trivy]
+name=Trivy repository
+baseurl=https://get.trivy.dev/rpm/releases/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://get.trivy.dev/rpm/public.key
+EOF
+  fi
+
+  sudo dnf install -y trivy
 fi
 
 # ── TablePlus ────────────────────────────────────────────────────────────────

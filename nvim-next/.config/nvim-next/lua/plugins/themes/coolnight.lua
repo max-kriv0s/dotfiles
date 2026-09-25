@@ -19,7 +19,10 @@ return {
       colors.bg_highlight = "#143652"
       colors.bg_popup = "#011423"
       colors.bg_search = "#0A64AC"
-      colors.bg_sidebar = "#011423"
+      -- bg_sidebar намеренно не задаём: при transparent = true тема обнуляет
+      -- фон боковых окон, а явный цвет здесь вернул бы его обратно, и дерево
+      -- отличалось бы от редактора. Плавающим окнам фон, наоборот, нужен —
+      -- они всплывают поверх кода, их полезно отделять.
       colors.bg_statusline = "#011423"
       colors.bg_visual = "#275378"
       colors.border = "#547998"

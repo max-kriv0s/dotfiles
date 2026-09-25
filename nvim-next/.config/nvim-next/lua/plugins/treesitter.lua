@@ -25,8 +25,7 @@ local parsers = {
   "hcl",
   "terraform",
   "yaml",
-  "json",
-  "jsonc",
+  "json", -- отдельного парсера jsonc нет, .jsonc разбирает этот же
   "toml",
   "sql",
   "make",

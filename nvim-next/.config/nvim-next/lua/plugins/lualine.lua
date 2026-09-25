@@ -9,6 +9,22 @@ return {
   config = function()
     local lazy_status = require("lazy.status")
 
+    -- Имена языковых серверов, подключённых к текущему буферу.
+    -- Пусто — значит сервер не подключился, и это сразу видно.
+    local function lsp_clients()
+      local names = {}
+
+      for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        table.insert(names, client.name)
+      end
+
+      if #names == 0 then
+        return ""
+      end
+
+      return " " .. table.concat(names, ", ")
+    end
+
     local opts = {
       options = {
         theme = "auto",
@@ -23,6 +39,7 @@ return {
             lazy_status.updates, -- сколько плагинов можно обновить
             cond = lazy_status.has_updates,
           },
+          lsp_clients,
           "encoding",
           "fileformat",
           "filetype",

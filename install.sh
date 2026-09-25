@@ -100,6 +100,7 @@ PACKAGES=(
   git
   nvim
   zed
+  lazygit
 )
 
 for pkg in "${PACKAGES[@]}"; do

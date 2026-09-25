@@ -1,16 +1,27 @@
 [
   {
     "context": "Workspace",
-    "bindings": {
-      "cmd-b": "workspace::ToggleRightDock",
-      "ctrl-b": "workspace::ToggleRightDock",
-    },
+    //   "bindings": {
+    //     "cmd-b": "workspace::ToggleRightDock",
+    //     "ctrl-b": "workspace::ToggleRightDock",
+    //   },
+    // },
+    // {
+    //   "context": "Workspace",
+    //   "bindings": {
+    //     "cmd-alt-b": "workspace::ToggleLeftDock",
+    //     "ctrl-alt-b": "workspace::ToggleLeftDock",
+    //   },
+    // "bindings": {
+    //   // пример для закрытия панели тем же нажатием
+    //   "cmd-shift-e": "project_panel::Toggle",
+    // },
   },
   {
-    "context": "Workspace",
+    "context": "ProjectPanel && not_editing",
     "bindings": {
-      "cmd-alt-b": "workspace::ToggleLeftDock",
-      "ctrl-alt-b": "workspace::ToggleLeftDock",
+      "ctrl-enter": "project_panel::OpenSplitVertical",
+      "ctrl-shift-enter": "project_panel::OpenSplitHorizontal",
     },
   },
   {

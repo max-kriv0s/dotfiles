@@ -30,6 +30,7 @@ require("lazy").setup({
     -- верхний уровень каталога plugins
     { import = "plugins" },
     { import = "plugins.themes" },
+    { import = "plugins.lsp" },
   },
   checker = {
     enabled = true, -- проверять обновления плагинов

@@ -5,7 +5,10 @@ vim.g.maplocalleader = "\\"
 -- Обёртка, которая дополнительно регистрирует кириллический вариант маппинга
 local map = require("core.lang").map
 
--- Выход из Insert
+-- Выход из Insert.
+-- Только jj: jk в кириллице превращается в "ол", а это сочетание есть
+-- в обычных словах — "около", "сколько", "долго" — и выбрасывало бы
+-- из режима вставки посреди набора.
 map("i", "jj", "<Esc>", { desc = "Выйти из Insert" })
 
 -- Движение по экранным строкам, когда строка перенесена.
@@ -40,17 +43,32 @@ map("n", "<leader>sh", "<C-w>s", { desc = "Split горизонтально" })
 map("n", "<leader>se", "<C-w>=", { desc = "Уравнять размеры split" })
 map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Закрыть текущий split" })
 
+-- Развернуть текущее окно на весь экран и вернуть обратно.
+-- Логика взята из плагина szw/vim-maximizer: winrestcmd() отдаёт строку
+-- команд, восстанавливающую размеры всех окон точно как было, поэтому
+-- возврат не «уравнивает», а именно возвращает прежнюю раскладку.
+-- Состояние хранится в переменной вкладки — на каждой вкладке своё.
+map("n", "<leader>sm", function()
+  if vim.t.maximized then
+    vim.cmd(vim.t.maximized)
+    vim.t.maximized = nil
+  elseif vim.fn.winnr("$") > 1 then
+    vim.t.maximized = vim.fn.winrestcmd()
+    vim.cmd("vertical resize")
+    vim.cmd("resize")
+  end
+end, { desc = "Развернуть/вернуть окно" })
+
 -- Tabs — раскладки окон
 map("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Новая вкладка" })
 map("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Закрыть вкладку" })
 map("n", "<leader>tn", "<cmd>tabnext<CR>", { desc = "Следующая вкладка" })
 map("n", "<leader>tp", "<cmd>tabprevious<CR>", { desc = "Предыдущая вкладка" })
-map("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Текущий буфер в новой вкладке" })
+-- tb, а не tf: tf отдан плавающему терминалу, как было в сборке A
+map("n", "<leader>tb", "<cmd>tabnew %<CR>", { desc = "Текущий буфер в новой вкладке" })
 
--- Buffers — открытые файлы
-map("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Следующий буфер" })
-map("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Предыдущий буфер" })
-map("n", "<leader>bx", "<cmd>bdelete<CR>", { desc = "Закрыть буфер" })
+-- Buffers — вся группа <leader>b и переключение Tab / Shift+Tab
+-- заданы в plugins/bufferline.lua, рядом с самой полосой буферов.
 
 -- Переключатели
 map("n", "<leader>uw", function()

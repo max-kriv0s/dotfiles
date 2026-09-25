@@ -4,27 +4,33 @@ TERM = "xterm-256color"
 
 [general]
 import = [
-#  "~/.config/theme/current/alacritty.toml",
-  "~/.config/alacritty/themes/coolnight.toml",
+  "~/.config/theme/current/alacritty.toml",
+#  "~/.config/alacritty/themes/coolnight.toml",
 ]
 
 # ── Font ──────────────────────────────────────────────────────────────────────
 [font]
 size = 17.0
 
+# Вариант без "Mono": иконки Nerd Font занимают свою натуральную ширину
+# и не сжимаются в одну ячейку — в деревьях файлов выглядит аккуратнее.
+# Если сетка терминала поедет — вернуть "MesloLGS Nerd Font Mono".
 [font.normal]
 # family = "JetBrainsMono Nerd Font"
-family = "MesloLGS Nerd Font Mono"
+# family = "MesloLGS Nerd Font Mono"
+family = "MesloLGS Nerd Font"
 style = "Regular"
 
 [font.bold]
 # family = "JetBrainsMono Nerd Font"
-family = "MesloLGS Nerd Font Mono"
+# family = "MesloLGS Nerd Font Mono"
+family = "MesloLGS Nerd Font"
 style = "Bold"
 
 [font.italic]
 # family = "JetBrainsMono Nerd Font"
-family = "MesloLGS Nerd Font Mono"
+# family = "MesloLGS Nerd Font Mono"
+family = "MesloLGS Nerd Font"
 style = "Italic"
 
 # ── Window ────────────────────────────────────────────────────────────────────
@@ -33,8 +39,11 @@ dimensions = { columns = 110, lines = 32 }
 padding = { x = 10, y = 10 }
 #decorations = "None"	# "None" — скрыть шапку как в ghostty
 decorations = "Full"
-opacity = 0.8
-blur = true
+# Как в ghostty: background-opacity = 0.92.
+# Чем ниже opacity, тем сильнее цвета темы смешиваются с рабочим столом
+# и тем тусклее выглядит nvim — он рисует не свой фон, а фон терминала.
+opacity = 0.92
+# blur = true
 option_as_alt = "Both"
 
 # ── Cursor ────────────────────────────────────────────────────────────────────

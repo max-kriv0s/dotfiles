@@ -1,0 +1,64 @@
+-- Альтернатива neo-tree: легче, одна зависимость вместо трёх, но без
+-- git-статуса и диагностик в дереве.
+--
+-- Чтобы переключиться: закомментировать содержимое plugins/neo-tree.lua
+-- (оставив `return {}`) и раскомментировать этот файл.
+-- Клавиши те же: <leader>ee открыть, <leader>ef на текущем файле,
+-- l и стрелка вправо — открыть, h и стрелка влево — закрыть.
+
+return {}
+
+-- return {
+--   "nvim-tree/nvim-tree.lua",
+--   dependencies = { "nvim-tree/nvim-web-devicons" },
+--   cmd = { "NvimTreeToggle", "NvimTreeFindFileToggle" },
+--   keys = {
+--     { "<leader>ee", "<cmd>NvimTreeToggle<CR>", desc = "Открыть или закрыть дерево" },
+--     { "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Дерево на текущем файле" },
+--   },
+--   init = function()
+--     vim.g.loaded_netrw = 1
+--     vim.g.loaded_netrwPlugin = 1
+--   end,
+--   opts = {
+--     view = {
+--       width = 32,
+--     },
+--     renderer = {
+--       indent_markers = { enable = false },
+--       icons = {
+--         glyphs = {
+--           folder = {
+--             arrow_closed = "",
+--             arrow_open = "",
+--           },
+--         },
+--       },
+--     },
+--     actions = {
+--       open_file = {
+--         window_picker = { enable = false },
+--       },
+--     },
+--     filters = {
+--       custom = { ".DS_Store" },
+--     },
+--     git = {
+--       ignore = false,
+--     },
+--     on_attach = function(bufnr)
+--       local api = require("nvim-tree.api")
+--
+--       api.config.mappings.default_on_attach(bufnr)
+--
+--       local function map(lhs, rhs, desc)
+--         vim.keymap.set("n", lhs, rhs, { buffer = bufnr, desc = desc, nowait = true })
+--       end
+--
+--       map("l", api.node.open.edit, "Открыть")
+--       map("<Right>", api.node.open.edit, "Открыть")
+--       map("h", api.node.navigate.parent_close, "Закрыть узел")
+--       map("<Left>", api.node.navigate.parent_close, "Закрыть узел")
+--     end,
+--   },
+-- }

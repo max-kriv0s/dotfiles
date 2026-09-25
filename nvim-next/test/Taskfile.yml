@@ -1,0 +1,16 @@
+# go-task. Схема подключается через SchemaStore — это следующий шаг Фазы 3.
+# Тип файла остаётся обычным yaml, отдельного сервера тут нет.
+
+version: "3"
+
+tasks:
+  build:
+    desc: Собрать приложение
+    cmds:
+      - npm ci
+      - npm run build
+
+  test:
+    desc: Прогнать тесты
+    cmds:
+      - npm test

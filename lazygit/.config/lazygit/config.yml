@@ -1,0 +1,24 @@
+# Конфигурация lazygit.
+# Полный список настроек: lazygit --config
+
+git:
+  pagers:
+    - # Показывать дифф через delta — тот же вид, что у `git diff` в терминале.
+      # Две колонки, номера строк и тема подсветки берутся из секции [delta]
+      # в ~/dotfiles/git/.config/git/config, здесь они намеренно не дублируются.
+      #
+      # --paging=never обязателен: страницами листает сам lazygit,
+      # второй pager внутри него сломал бы прокрутку.
+      colorArg: always
+      pager: delta --dark --paging=never
+os:
+  # Клавиша `e` открывает файл в том nvim, из которого запущен lazygit:
+  # переменная $NVIM выставляется автоматически внутри встроенного терминала,
+  # и --server отправляет команду в эту же сессию, а не запускает вторую копию.
+  #
+  # Если lazygit запущен из обычного терминала, $NVIM пуст — открываем nvim как есть.
+  edit: 'if [ -n "$NVIM" ]; then nvim --server "$NVIM" --remote-tab {{filename}}; else nvim -- {{filename}}; fi'
+  editAtLine: 'if [ -n "$NVIM" ]; then nvim --server "$NVIM" --remote-tab {{filename}} && nvim --server "$NVIM" --remote-send "<C-\><C-N>:{{line}}<CR>"; else nvim +{{line}} -- {{filename}}; fi'
+  # Не приостанавливать lazygit на время редактирования: файл уже открыт
+  # в соседней вкладке nvim, ждать нечего.
+  editInTerminal: false

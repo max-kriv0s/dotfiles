@@ -1,0 +1,13 @@
+{
+  // Файл с комментариями: тип jsonc, подсветка от парсера json.
+  // Схема tsconfig подключится через SchemaStore.
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true
+  },
+  "include": ["*.ts", "*.tsx", "*.vue"]
+}

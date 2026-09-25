@@ -48,6 +48,11 @@ opt.clipboard = "unnamedplus" -- y и p работают с системным �
 opt.mouse = "a"
 opt.mousefocus = true
 
+-- Без localoptions после восстановления сессии теряется тип буфера у файлов,
+-- чей тип задан не расширением: compose.yaml, .gitlab-ci.yml, playbooks
+opt.sessionoptions:append("localoptions")
+opt.sessionoptions:append("winpos")
+
 -- Файлы и история
 opt.swapfile = false -- без swap-файлов
 opt.backup = false -- без backup-файлов, история отмен живёт только пока открыт редактор
@@ -58,7 +63,7 @@ opt.updatetime = 250 -- задержка перед CursorHold (диагност
 -- Если не дождаться — набранное выполнится как обычные команды:
 -- <leader>s превратится в "сдвиг вправо" + "substitute" и съест символ.
 -- Скорость всплытия подсказок задаётся отдельно, параметром delay в which-key.
-opt.timeoutlen = 1500
+opt.timeoutlen = 1000
 
 -- Разное
 opt.backspace = "indent,eol,start" -- backspace работает везде

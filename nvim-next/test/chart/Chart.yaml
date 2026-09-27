@@ -1,9 +1,0 @@
-# Наличие этого файла включает определение helm для соседних
-# templates/*.yaml и values.yaml — см. core/filetypes.lua
-
-apiVersion: v2
-name: check
-description: Чарт для проверки helm_ls
-type: application
-version: 0.1.0
-appVersion: "1.0.0"

@@ -70,19 +70,19 @@
 Создать ссылку:
 
 ```bash
-ln -s ~/dotfiles/nvim-test/.config/nvim-test ~/.config/nvim-test
+ln -s ~/dotfiles/lazygit/.config/lazygit ~/.config/lazygit
 ```
 
 Проверить:
 
 ```bash
-ls -la ~/.config | grep nvim-test
+ls -la ~/.config | grep lazygit
 ```
 
 Удалить symlink:
 
 ```bash
-rm ~/.config/nvim-test
+rm ~/.config/lazygit
 ```
 
 Это удалит только ссылку, а не каталог в dotfiles.

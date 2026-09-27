@@ -1,39 +1,24 @@
+-- Список проблем отдельным окном: ошибки LSP, линтеров, quickfix, TODO.
+-- Отличие от <leader>d и <leader>D: там всплывающее окно с одной ошибкой
+-- или быстрый список, здесь — постоянное окно, по которому можно ходить,
+-- не теряя место в коде.
 return {
-    {
-        "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
-        keys = {
-            {
-                "<leader>qq",
-                "<cmd>Trouble diagnostics toggle focus=true<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<leader>qQ",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-                "<leader>cs",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
-                desc = "Symbols (Trouble)",
-            },
-            {
-                "<leader>cl",
-                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-                desc = "LSP Definitions / references / ... (Trouble)",
-            },
-            {
-                "<leader>qL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
-            },
-            {
-                "<leader>qQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
-            },
-        },
-    }
+  "folke/trouble.nvim",
+  -- todo-comments здесь не ради подсветки, а ради источника `Trouble todo`:
+  -- он лежит внутри этого плагина, и без зависимости trouble о нём не знает,
+  -- пока todo-comments не загрузится сам.
+  dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
+  cmd = "Trouble",
+  opts = {
+    -- Курсор сразу переходит в окно списка: обычно его и открывают,
+    -- чтобы пройтись по ошибкам, а не чтобы посмотреть краем глаза.
+    focus = true,
+  },
+  keys = {
+    { "<leader>xw", "<cmd>Trouble diagnostics toggle<CR>", desc = "Ошибки по проекту" },
+    { "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Ошибки текущего файла" },
+    { "<leader>xq", "<cmd>Trouble qflist toggle<CR>", desc = "Quickfix-список" },
+    { "<leader>xl", "<cmd>Trouble loclist toggle<CR>", desc = "Location-список" },
+    { "<leader>xt", "<cmd>Trouble todo toggle<CR>", desc = "TODO и FIXME по проекту" },
+  },
 }

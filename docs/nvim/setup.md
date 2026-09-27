@@ -163,25 +163,25 @@ virtual_text = false
 Всё держится на переменной `NVIM_APPNAME` — она подставляется вместо `nvim`
 во все пути:
 
-| Без переменной | `NVIM_APPNAME=nvim-test` |
+| Без переменной | `NVIM_APPNAME=nvim-try` |
 | --- | --- |
-| `~/.config/nvim` | `~/.config/nvim-test` |
-| `~/.local/share/nvim` | `~/.local/share/nvim-test` |
-| `~/.local/state/nvim` | `~/.local/state/nvim-test` |
-| `~/.cache/nvim` | `~/.cache/nvim-test` |
+| `~/.config/nvim` | `~/.config/nvim-try` |
+| `~/.local/share/nvim` | `~/.local/share/nvim-try` |
+| `~/.local/state/nvim` | `~/.local/state/nvim-try` |
+| `~/.cache/nvim` | `~/.cache/nvim-try` |
 
 ### Быстро, без dotfiles
 
 ```bash
-mkdir -p ~/.config/nvim-test
-NVIM_APPNAME=nvim-test nvim
+mkdir -p ~/.config/nvim-try
+NVIM_APPNAME=nvim-try nvim
 ```
 
 Так же можно клонировать чужую сборку:
 
 ```bash
-git clone https://github.com/кто-то/его-конфиг ~/.config/nvim-test
-NVIM_APPNAME=nvim-test nvim
+git clone https://github.com/кто-то/его-конфиг ~/.config/nvim-try
+NVIM_APPNAME=nvim-try nvim
 ```
 
 Минус: каталог лежит в `~/.config` и в репозиторий не попадёт.
@@ -189,10 +189,10 @@ NVIM_APPNAME=nvim-test nvim
 ### Внутри dotfiles, через stow
 
 ```bash
-mkdir -p ~/dotfiles/nvim-test/.config/nvim-test
-touch ~/dotfiles/nvim-test/.config/nvim-test/init.lua
-cd ~/dotfiles && stow nvim-test
-NVIM_APPNAME=nvim-test nvim
+mkdir -p ~/dotfiles/nvim-try/.config/nvim-try
+touch ~/dotfiles/nvim-try/.config/nvim-try/init.lua
+cd ~/dotfiles && stow nvim-try
+NVIM_APPNAME=nvim-try nvim
 ```
 
 Если пакет нужен и на новой машине — добавить его имя в массив `PACKAGES`
@@ -203,7 +203,7 @@ NVIM_APPNAME=nvim-test nvim
 В `zsh/.config/zsh/aliases.zsh`:
 
 ```sh
-alias nv-test="NVIM_APPNAME=nvim-test nvim"
+alias nv-try="NVIM_APPNAME=nvim-try nvim"
 ```
 
 Проверить, какая конфигурация запущена, можно изнутри:
@@ -218,7 +218,7 @@ alias nv-test="NVIM_APPNAME=nvim-test nvim"
 ### Сколько занимает места
 
 ```bash
-du -sh ~/.local/share/nvim-test ~/.local/state/nvim-test ~/.cache/nvim-test
+du -sh ~/.local/share/nvim-try ~/.local/state/nvim-try ~/.cache/nvim-try
 du -sh ~/.config/nvim* ~/.local/share/nvim* ~/.local/state/nvim* ~/.cache/nvim*
 ```
 
@@ -230,20 +230,20 @@ du -sh ~/.config/nvim* ~/.local/share/nvim* ~/.local/state/nvim* ~/.cache/nvim*
 можно просто переустановить плагины с нуля:
 
 ```bash
-rm -rf ~/.local/share/nvim-test ~/.local/state/nvim-test ~/.cache/nvim-test
+rm -rf ~/.local/share/nvim-try ~/.local/state/nvim-try ~/.cache/nvim-try
 ```
 
 Потом сама конфигурация:
 
 ```bash
-cd ~/dotfiles && stow -D nvim-test     # убрать симлинк
-rm -rf ~/dotfiles/nvim-test            # удалить пакет
+cd ~/dotfiles && stow -D nvim-try     # убрать симлинк
+rm -rf ~/dotfiles/nvim-try            # удалить пакет
 ```
 
 Или, если она лежала прямо в `~/.config`:
 
 ```bash
-rm -rf ~/.config/nvim-test
+rm -rf ~/.config/nvim-try
 ```
 
 Последнее — убрать алиас и имя пакета из установочных скриптов.

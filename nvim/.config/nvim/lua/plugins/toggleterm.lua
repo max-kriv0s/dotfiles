@@ -1,49 +1,62 @@
+-- Терминал внутри редактора.
+-- Раскладка полностью как в сборке A. Вкладочная команда "буфер в новую
+-- вкладку" ради этого переехала с <leader>tf на <leader>tb.
 return {
+  "akinsho/toggleterm.nvim",
+  version = "*",
+  cmd = { "ToggleTerm", "TermExec" },
+  keys = {
+    { [[<C-\>]], desc = "Открыть или скрыть терминал" },
+    { "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", desc = "Плавающий терминал" },
+    { "<leader>th", "<cmd>ToggleTerm direction=horizontal<CR>", desc = "Терминал снизу" },
+    { "<leader>tv", "<cmd>ToggleTerm direction=vertical<CR>", desc = "Терминал сбоку" },
     {
-        'akinsho/toggleterm.nvim',
-        version = "*",
-
-        config = function()
-            require("toggleterm").setup({
-                size = function(term)
-                    if term.direction == "horizontal" then
-                        return 15
-                    end
-
-                    if term.direction == "vertical" then
-                        return math.floor(vim.o.columns * 0.4)
-                    end
-                end,
-                persist_size = true, -- ВАЖНО: запоминать вручную измененный размер terminal split в текущей сессии
-                direction = "horizontal",
-                open_mapping = [[<c-\>]], -- Ctrl+\ — открыть/скрыть toggleterm
-            })
-
-            vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", { desc = "Toggle float terminal", silent = true }) -- Space+t f — открыть/скрыть плавающий терминал
-            vim.keymap.set("n", "<leader>th", "<cmd>ToggleTerm direction=horizontal<CR>", { desc = "Toggle horizontal terminal", silent = true }) -- Space+t h — открыть/скрыть горизонтальный терминал на 15 строк
-            vim.keymap.set("n", "<leader>tv", function()
-                vim.cmd("ToggleTerm direction=vertical size=" .. math.floor(vim.o.columns * 0.4))
-            end, { desc = "Toggle vertical terminal", silent = true }) -- Space+t v — открыть/скрыть вертикальный терминал на 40% ширины
-            vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm direction=tab<CR>", { desc = "Toggle tab terminal", silent = true }) -- Space+t t — открыть/скрыть терминал в отдельной вкладке
-            vim.keymap.set("n", "<leader>t1", "<cmd>1ToggleTerm<CR>", { desc = "Toggle terminal 1", silent = true }) -- Space+t 1 — открыть/скрыть терминал N1
-            vim.keymap.set("n", "<leader>t2", "<cmd>2ToggleTerm<CR>", { desc = "Toggle terminal 2", silent = true }) -- Space+t 2 — открыть/скрыть терминал N2
-            vim.keymap.set("n", "<leader>t3", "<cmd>3ToggleTerm<CR>", { desc = "Toggle terminal 3", silent = true }) -- Space+t 3 — открыть/скрыть терминал N3
-
-            local function set_terminal_keymaps()
-                local opts = { buffer = 0, silent = true }
-                vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts) -- Esc — выйти из Terminal в Normal
-                vim.keymap.set('t', 'jj', [[<C-\><C-n>]], opts) -- jj — выйти из Terminal в Normal
-                vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts) -- Ctrl+h — перейти в левое окно
-                vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts) -- Ctrl+j — перейти в нижнее окно
-                vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts) -- Ctrl+k — перейти в верхнее окно
-                vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts) -- Ctrl+l — перейти в правое окно
-                vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts) -- Ctrl+w — выйти в Normal и начать оконную команду
-            end
-
-            vim.api.nvim_create_autocmd("TermOpen", {
-                pattern = "term://*",
-                callback = set_terminal_keymaps,
-            })
-        end,
+      "<leader>tt",
+      "<cmd>ToggleTerm direction=tab<CR>",
+      desc = "Терминал в отдельной вкладке",
     },
+    { "<leader>t1", "<cmd>1ToggleTerm<CR>", desc = "Терминал 1" },
+    { "<leader>t2", "<cmd>2ToggleTerm<CR>", desc = "Терминал 2" },
+    { "<leader>t3", "<cmd>3ToggleTerm<CR>", desc = "Терминал 3" },
+  },
+  opts = {
+    open_mapping = [[<C-\>]],
+    direction = "horizontal",
+    persist_size = true, -- запоминать размер, изменённый мышью или <C-w>
+    size = function(term)
+      if term.direction == "horizontal" then
+        return 15
+      end
+
+      if term.direction == "vertical" then
+        return math.floor(vim.o.columns * 0.4)
+      end
+    end,
+    float_opts = {
+      border = "rounded",
+    },
+  },
+  config = function(_, opts)
+    require("toggleterm").setup(opts)
+
+    -- Внутри терминала обычные клавиши перехвачены самим шеллом,
+    -- поэтому выход и перемещение по окнам назначаем отдельно
+    vim.api.nvim_create_autocmd("TermOpen", {
+      group = vim.api.nvim_create_augroup("user_toggleterm", { clear = true }),
+      pattern = "term://*",
+      callback = function()
+        local function map(lhs, rhs, desc)
+          vim.keymap.set("t", lhs, rhs, { buffer = 0, silent = true, desc = desc })
+        end
+
+        map("<Esc>", [[<C-\><C-n>]], "Выйти в Normal")
+        -- Только jj: jk в кириллице даёт «ол», которое встречается в словах
+        map("jj", [[<C-\><C-n>]], "Выйти в Normal")
+        map("<C-h>", [[<Cmd>wincmd h<CR>]], "Окно слева")
+        map("<C-j>", [[<Cmd>wincmd j<CR>]], "Окно снизу")
+        map("<C-k>", [[<Cmd>wincmd k<CR>]], "Окно сверху")
+        map("<C-l>", [[<Cmd>wincmd l<CR>]], "Окно справа")
+      end,
+    })
+  end,
 }

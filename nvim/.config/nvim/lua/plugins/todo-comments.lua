@@ -17,13 +17,28 @@ return {
       desc = "Следующая пометка TODO",
     },
     {
+      "]е",
+      function()
+        require("todo-comments").jump_next()
+      end,
+      desc = "Следующая пометка TODO (рус)",
+    },
+    {
       "[t",
       function()
         require("todo-comments").jump_prev()
       end,
       desc = "Предыдущая пометка TODO",
     },
+    {
+      "[е",
+      function()
+        require("todo-comments").jump_prev()
+      end,
+      desc = "Предыдущая пометка TODO (рус)",
+    },
     -- Поиск по проекту тем же fzf-lua, что и остальные <leader>f
     { "<leader>ft", "<cmd>TodoFzfLua<CR>", desc = "Пометки TODO по проекту" },
+    { "<leader>ае", "<cmd>TodoFzfLua<CR>", desc = "Пометки TODO по проекту (рус)" },
   },
 }

@@ -32,12 +32,21 @@ return {
         end,
         desc = "Отладка: старт",
       },
+      -- У каждой клавиши рядом кириллический дубль: обёртка core.lang.map на
+      -- список keys lazy.nvim не действует, он читается до загрузки плагина.
       {
         "<leader>dc",
         function()
           require("dap").continue({ new = true })
         end,
         desc = "Выбрать конфигурацию отладки",
+      },
+      {
+        "<leader>вс",
+        function()
+          require("dap").continue({ new = true })
+        end,
+        desc = "Выбрать конфигурацию отладки (рус)",
       },
       -- Пауза останавливает программу там, где она сейчас: нужна, когда процесс
       -- не доходит до точки останова — завис, крутит цикл, ждёт запрос.
@@ -48,6 +57,7 @@ return {
       -- Shift+F11 доходит не из каждого терминала, поэтому есть дубль под leader
       { "<S-F11>", function() require("dap").step_out() end, desc = "Отладка: шаг наружу" },
       { "<leader>do", function() require("dap").step_out() end, desc = "Шаг наружу" },
+      { "<leader>вщ", function() require("dap").step_out() end, desc = "Шаг наружу (рус)" },
       {
         "<leader>db",
         function()
@@ -55,8 +65,17 @@ return {
         end,
         desc = "Точка останова с условием",
       },
+      {
+        "<leader>ви",
+        function()
+          require("dap").set_breakpoint(vim.fn.input("Условие остановки: "))
+        end,
+        desc = "Точка останова с условием (рус)",
+      },
       { "<leader>du", function() require("dapui").toggle() end, desc = "Панели отладки" },
+      { "<leader>вг", function() require("dapui").toggle() end, desc = "Панели отладки (рус)" },
       { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Консоль отладки" },
+      { "<leader>вк", function() require("dap").repl.toggle() end, desc = "Консоль отладки (рус)" },
       -- Панели закрываем всегда: программа могла завершиться сама, и тогда
       -- завершать нечего, а окна остаются висеть.
       {
@@ -71,6 +90,19 @@ return {
           require("dapui").close()
         end,
         desc = "Завершить отладку",
+      },
+      {
+        "<leader>вч",
+        function()
+          local dap = require("dap")
+
+          if dap.session() then
+            dap.terminate()
+          end
+
+          require("dapui").close()
+        end,
+        desc = "Завершить отладку (рус)",
       },
     },
     config = function()

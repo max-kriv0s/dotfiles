@@ -27,6 +27,13 @@ return {
           buf_map("n", "gt", fzf.lsp_typedefs, "Перейти к типу")
           buf_map("n", "gR", fzf.lsp_references, "Показать использования")
 
+          -- Те же переходы в группе <leader>c: клавиши g… в меню which-key
+          -- видны только после нажатия g, а под leader собрано всё остальное
+          buf_map("n", "<leader>cg", fzf.lsp_definitions, "Перейти к определению")
+          buf_map("n", "<leader>ci", fzf.lsp_implementations, "Перейти к реализации")
+          buf_map("n", "<leader>ct", fzf.lsp_typedefs, "Перейти к типу")
+          buf_map("n", "<leader>cu", fzf.lsp_references, "Показать использования")
+
           -- Действия над кодом
           buf_map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Быстрое исправление")
           buf_map("n", "<leader>rn", vim.lsp.buf.rename, "Переименовать символ")

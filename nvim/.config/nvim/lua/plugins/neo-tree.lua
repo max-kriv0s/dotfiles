@@ -8,10 +8,16 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   cmd = "Neotree",
+  -- Кириллический дубль указан рядом с каждой клавишей. Обёртка core.lang.map
+  -- здесь не поможет: список keys lazy.nvim читает до загрузки плагина.
+  -- В подсказках which-key кириллица отфильтрована и списка не удваивает.
   keys = {
     { "<leader>ee", "<cmd>Neotree left toggle<CR>", desc = "Открыть или закрыть дерево" },
+    { "<leader>уу", "<cmd>Neotree left toggle<CR>", desc = "Открыть или закрыть дерево (рус)" },
     { "<leader>ef", "<cmd>Neotree left reveal toggle<CR>", desc = "Дерево на текущем файле" },
+    { "<leader>уа", "<cmd>Neotree left reveal toggle<CR>", desc = "Дерево на текущем файле (рус)" },
     { "<leader>ec", "<cmd>Neotree close<CR>", desc = "Закрыть дерево" },
+    { "<leader>ус", "<cmd>Neotree close<CR>", desc = "Закрыть дерево (рус)" },
     {
       "<leader>er",
       function()
@@ -19,6 +25,13 @@ return {
         require("neo-tree.sources.manager").refresh("filesystem")
       end,
       desc = "Обновить дерево",
+    },
+    {
+      "<leader>ук",
+      function()
+        require("neo-tree.sources.manager").refresh("filesystem")
+      end,
+      desc = "Обновить дерево (рус)",
     },
   },
   opts = {

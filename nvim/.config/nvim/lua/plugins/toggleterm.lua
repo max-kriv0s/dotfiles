@@ -8,16 +8,27 @@ return {
   keys = {
     { [[<C-\>]], desc = "Открыть или скрыть терминал" },
     { "<leader>tf", "<cmd>ToggleTerm direction=float<CR>", desc = "Плавающий терминал" },
+    { "<leader>еа", "<cmd>ToggleTerm direction=float<CR>", desc = "Плавающий терминал (рус)" },
     { "<leader>th", "<cmd>ToggleTerm direction=horizontal<CR>", desc = "Терминал снизу" },
+    { "<leader>ер", "<cmd>ToggleTerm direction=horizontal<CR>", desc = "Терминал снизу (рус)" },
     { "<leader>tv", "<cmd>ToggleTerm direction=vertical<CR>", desc = "Терминал сбоку" },
+    { "<leader>ем", "<cmd>ToggleTerm direction=vertical<CR>", desc = "Терминал сбоку (рус)" },
     {
       "<leader>tt",
       "<cmd>ToggleTerm direction=tab<CR>",
       desc = "Терминал в отдельной вкладке",
     },
+    {
+      "<leader>ее",
+      "<cmd>ToggleTerm direction=tab<CR>",
+      desc = "Терминал в отдельной вкладке (рус)",
+    },
     { "<leader>t1", "<cmd>1ToggleTerm<CR>", desc = "Терминал 1" },
+    { "<leader>е1", "<cmd>1ToggleTerm<CR>", desc = "Терминал 1 (рус)" },
     { "<leader>t2", "<cmd>2ToggleTerm<CR>", desc = "Терминал 2" },
+    { "<leader>е2", "<cmd>2ToggleTerm<CR>", desc = "Терминал 2 (рус)" },
     { "<leader>t3", "<cmd>3ToggleTerm<CR>", desc = "Терминал 3" },
+    { "<leader>е3", "<cmd>3ToggleTerm<CR>", desc = "Терминал 3 (рус)" },
   },
   opts = {
     open_mapping = [[<C-\>]],

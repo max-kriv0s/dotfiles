@@ -7,6 +7,12 @@
 -- так и задумано, там про это стоит комментарий.
 return {
   "christoomey/vim-tmux-navigator",
+  -- Плагин вешает свои маппинги при загрузке, в том числе <C-\> на переход
+  -- в предыдущую панель. Он грузится позже toggleterm — по первому <C-h> —
+  -- и затирает ему открытие терминала. Свои клавиши задаём ниже сами.
+  init = function()
+    vim.g.tmux_navigator_no_mappings = 1
+  end,
   cmd = {
     "TmuxNavigateLeft",
     "TmuxNavigateDown",

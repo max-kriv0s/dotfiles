@@ -13,6 +13,14 @@ return {
       ft = "python",
       desc = "Отладить тест под курсором",
     },
+    {
+      "<leader>ве",
+      function()
+        require("dap-python").test_method()
+      end,
+      ft = "python",
+      desc = "Отладить тест под курсором (рус)",
+    },
   },
   config = function()
     require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")

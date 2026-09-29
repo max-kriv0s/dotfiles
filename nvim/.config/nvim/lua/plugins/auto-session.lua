@@ -18,6 +18,8 @@ return {
   keys = {
     -- В сборке B были SessionRestore и SessionSave — они объявлены устаревшими
     { "<leader>wr", "<cmd>AutoSession restore<CR>", desc = "Восстановить сессию каталога" },
+    { "<leader>цк", "<cmd>AutoSession restore<CR>", desc = "Восстановить сессию каталога (рус)" },
     { "<leader>ws", "<cmd>AutoSession save<CR>", desc = "Сохранить сессию каталога" },
+    { "<leader>цы", "<cmd>AutoSession save<CR>", desc = "Сохранить сессию каталога (рус)" },
   },
 }

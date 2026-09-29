@@ -13,6 +13,14 @@ return {
       ft = "go",
       desc = "Отладить тест под курсором",
     },
+    {
+      "<leader>ве",
+      function()
+        require("dap-go").debug_test()
+      end,
+      ft = "go",
+      desc = "Отладить тест под курсором (рус)",
+    },
   },
   config = function()
     require("dap-go").setup()

@@ -81,11 +81,6 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Shell integrations
-export FZF_DEFAULT_OPTS="-i"
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/maxim/.lmstudio/bin"
 # End of LM Studio CLI section
@@ -94,4 +89,11 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   # Ghostty Wayland preference
   export GHOSTTY_WAYLAND=1
 fi
+
+# Shell integrations — keep at the end of the file (zoxide must be initialized last)
+
+# Shell integrations
+export FZF_DEFAULT_OPTS="-i"
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 

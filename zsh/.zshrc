@@ -91,8 +91,6 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # Shell integrations — keep at the end of the file (zoxide must be initialized last)
-
-# Shell integrations
 export FZF_DEFAULT_OPTS="-i"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"

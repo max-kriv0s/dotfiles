@@ -31,8 +31,8 @@ return {
       -- Enter подставляет только явно выбранный вариант: если ничего не
       -- выбрано клавишами, он просто переводит строку
       ["<CR>"] = { "accept", "fallback" },
-      -- Tab прыгает по местам внутри развёрнутого сниппета
-      ["<Tab>"] = { "snippet_forward", "fallback" },
+      -- Tab принимает выбранный вариант или первый; без меню — переход по сниппету
+      ["<Tab>"] = { "select_and_accept", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
     },
 

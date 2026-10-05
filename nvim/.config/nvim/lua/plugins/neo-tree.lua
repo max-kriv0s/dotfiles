@@ -69,7 +69,12 @@ return {
       mappings = {
         -- Открыть и закрыть как в vim: l вправо, h влево
         ["l"] = "open",
+        ["д"] = "open",
         ["h"] = "close_node",
+        ["р"] = "close_node",
+        ["н"] = "copy_to_clipboard",
+        ["ч"] = "cut_to_clipboard",
+        ["з"] = "paste_from_clipboard",
         ["<Right>"] = "open",
         ["<Left>"] = "close_node",
         ["<Space>"] = "none", -- Space остаётся leader, не сворачивает узел

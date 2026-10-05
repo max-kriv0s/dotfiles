@@ -20,6 +20,18 @@ map({ "n", "v" }, "k", function()
   return vim.v.count == 0 and "gk" or "k"
 end, { expr = true, desc = "Вверх по экранной строке" })
 
+-- То же для стрелок: без этого они прыгают через всю перенесённую строку
+map({ "n", "v" }, "<Down>", function()
+  return vim.v.count == 0 and "gj" or "j"
+end, { expr = true, desc = "Вниз по экранной строке" })
+map({ "n", "v" }, "<Up>", function()
+  return vim.v.count == 0 and "gk" or "k"
+end, { expr = true, desc = "Вверх по экранной строке" })
+
+-- В Insert счётчика нет, поэтому просто gj / gk одной командой Normal
+map("i", "<Down>", "<C-o>gj", { desc = "Вниз по экранной строке" })
+map("i", "<Up>", "<C-o>gk", { desc = "Вверх по экранной строке" })
+
 -- Поиск
 map("n", "<leader>nh", "<cmd>nohlsearch<CR>", { desc = "Убрать подсветку поиска" })
 

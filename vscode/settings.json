@@ -115,7 +115,7 @@
 
   // Golang
   "go.useLanguageServer": true, // при наборе кода, активирует подсказки, навигацию по коду, форматирование
-  "go.formatTool": "gofumpt", // утилита для форматирования go файлов.https://github.com/mvdan/gofumpt
+  // "go.formatTool": "gofumpt", // утилита для форматирования go файлов.https://github.com/mvdan/gofumpt
   "[go]": {
     "editor.formatOnSave": true, // при сохранении файла, будет выполняться форматирование при помощи утилиты gofumpt
     "editor.codeActionsOnSave": {
@@ -125,6 +125,8 @@
   },
   "gopls": {
     "build.buildFlags": ["-tags=integration"],
+    "formatting.local": "pntr/workers-v3",
+    "formatting.gofumpt": true,
   },
 
   // Python

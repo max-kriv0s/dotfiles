@@ -9,11 +9,11 @@ return {
     conform.setup({
       formatters_by_ft = {
         -- разработка
-        javascript = { "prettierd" },
-        javascriptreact = { "prettierd" },
-        typescript = { "prettierd" },
-        typescriptreact = { "prettierd" },
-        vue = { "prettierd" },
+        javascript = { "prettierd", "eslint_d" },
+        javascriptreact = { "prettierd", "eslint_d" },
+        typescript = { "prettierd", "eslint_d" },
+        typescriptreact = { "prettierd", "eslint_d" },
+        vue = { "prettierd", "eslint_d" },
         css = { "prettierd" },
         scss = { "prettierd" },
         html = { "prettierd" },

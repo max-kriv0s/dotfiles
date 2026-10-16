@@ -113,6 +113,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 -- При переходе в другое приложение сохранить изменённые файлы
 vim.api.nvim_create_autocmd("FocusLost", {
   group = augroup("autosave"),
+  nested = true,
   callback = function()
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
       if vim.api.nvim_buf_is_loaded(buf)

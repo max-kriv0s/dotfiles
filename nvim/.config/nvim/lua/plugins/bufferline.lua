@@ -69,9 +69,30 @@ return {
     map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Следующий буфер" })
     map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Предыдущий буфер" })
 
-    -- Своей команды "закрыть текущий буфер" у bufferline нет, поэтому здесь
-    -- штатная :bdelete — но держим её рядом с остальной группой <leader>b
-    map("n", "<leader>bx", "<cmd>bdelete<CR>", { desc = "Закрыть буфер" })
+    -- Сначала заменить буфер в окнах: иначе :bdelete может закрыть split,
+    -- а оставшееся единственным окном дерево завершит nvim.
+    map("n", "<leader>bx", function()
+      local buf = vim.api.nvim_get_current_buf()
+
+      if vim.bo[buf].modified then
+        vim.notify("Буфер не закрыт: есть несохранённые изменения", vim.log.levels.WARN)
+        return
+      end
+
+      local replacement
+      for _, candidate in ipairs(vim.api.nvim_list_bufs()) do
+        if candidate ~= buf and vim.bo[candidate].buflisted and vim.bo[candidate].buftype == "" then
+          replacement = candidate
+          break
+        end
+      end
+
+      replacement = replacement or vim.api.nvim_create_buf(true, false)
+      for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+        vim.api.nvim_win_set_buf(win, replacement)
+      end
+      vim.api.nvim_buf_delete(buf, {})
+    end, { desc = "Закрыть буфер" })
     map("n", "<leader>bo", "<cmd>BufferLineCloseOthers<CR>", { desc = "Закрыть остальные буферы" })
     map("n", "<leader>ba", "<cmd>%bdelete<CR>", { desc = "Закрыть все буферы" })
     map("n", "<leader>bp", "<cmd>BufferLinePick<CR>", { desc = "Выбрать буфер по букве" })

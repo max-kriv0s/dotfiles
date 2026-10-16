@@ -1,11 +1,3 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
   "diff_view_style": "split",
   "cli_default_open_behavior": "new_window",
@@ -18,13 +10,11 @@
   "agent": {
     "dock": "right",
     "default_width": 560,
-    "favorite_models": [],
-    "model_parameters": [],
   },
   "git_panel": {
     "group_by": "staging",
     "tree_view": true,
-    "dock": "left",
+    "dock": "right",
     "default_width": 350,
   },
   "base_keymap": "VSCode",
@@ -47,8 +37,7 @@
   },
   "project_panel": {
     "entry_spacing": "standard",
-    // "dock": "right",
-    "dock": "left",
+    "dock": "right",
     "default_width": 350, // если сбилось Cmd+Shift+P → workspace::ResetOpenDocksSize
     "auto_fold_dirs": false,
     // "git_status": false,
@@ -107,24 +96,14 @@
   },
   "extend_comment_on_newline": false,
   "languages": {
-    "CSS": {
-      "enable_language_server": true,
-    },
     "TypeScript": {
-      "formatter": {
-        "external": {
-          "command": "npx",
-          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
-        },
-      },
+      "formatter": ["prettier", { "code_action": "source.fixAll.eslint" }],
     },
     "JavaScript": {
-      "formatter": {
-        "external": {
-          "command": "npx",
-          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"],
-        },
-      },
+      "formatter": ["prettier", { "code_action": "source.fixAll.eslint" }],
+    },
+    "TSX": {
+      "formatter": ["prettier", { "code_action": "source.fixAll.eslint" }],
     },
     "Go": {
       "formatter": [
@@ -136,9 +115,8 @@
   "lsp": {
     "gopls": {
       "initialization_options": {
-        "local": "pntr/workers-v3",
         "gofumpt": true,
-        "buildFlags": ["-tags=integration"],
+        "buildFlags": ["-tags=integration,e2e"],
       },
     },
   },

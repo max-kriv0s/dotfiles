@@ -6,6 +6,7 @@ return {
     python = {
       analysis = {
         typeCheckingMode = "standard",
+        autoImportCompletions = true,
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
         diagnosticSeverityOverrides = {

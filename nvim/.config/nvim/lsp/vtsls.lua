@@ -9,6 +9,9 @@ local vue_plugin = vim.fn.stdpath("data") .. "/mason/packages/vue-language-serve
 -- одноимённым файлом из lspconfig.
 return {
   settings = {
+    ["js/ts"] = {
+      implicitProjectConfig = { checkJs = true },
+    },
     vtsls = {
       tsserver = {
         globalPlugins = {
